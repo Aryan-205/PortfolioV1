@@ -63,7 +63,7 @@ const ProjectItem = ({ title, description, imageSrc, url }) => (
     href={url} 
     target="_blank" 
     rel="noopener noreferrer" 
-    className="block w-full md:w-[60%] p-2 md:p-4 border-b border-white transition-all duration-300 hover:border-l-4 hover:border-l-white cursor-crosshair"
+    className="block w-full h-full md:w-[60%] p-2 md:p-4 border-b border-white transition-all duration-300 hover:border-l-4 hover:border-l-white cursor-crosshair"
   >
     <img src={imageSrc} className="w-full" alt={title} />
     <p className="font-light text-3xl md:text-6xl text-white pt-4">{title}</p>
@@ -74,8 +74,7 @@ const ProjectItem = ({ title, description, imageSrc, url }) => (
 export default function ProjectsPage() {
   return (
     <>
-      <div className="h-[300vh] md:h-[600vh] w-full bg-black p-6 md:p-24 rounded-t-3xl ">
-        
+      <div className="h-[400vh] md:h-[720vh] w-full bg-black p-6 md:p-24 rounded-t-3xl ">
         <div className="h-[100vh] z-20 w-fit sticky top-0">
           <div className="border-l border-white w-full h-full flex justify-start items-center">
             <div className="pl-4 backdrop-blur-sm rounded-xl">

@@ -56,13 +56,13 @@ export default function About() {
             className="hidden md:block md:h-full rounded-l-2xl object-cover w-full md:w-auto"
             alt="Aryan Bola"
           />
-          <div className="w-full h-full pt-4 md:pt-0 md:pl-6 text-white flex flex-col justify-between items-start gap-4 md:gap-12 z-10">
+          <div className="w-full h-full pt-4 md:pt-0 md:pl-6 text-white flex flex-col justify-between items-start gap-4 md:gap-8 z-10">
             <p className="text-2xl md:text-4xl font-semibold">Who am I?</p>
-            <div className="flex flex-col gap-3 md:gap-4">
-              <p className="text-base md:text-xl font-light">
+            <div className="flex flex-col justify-between">
+              <p className="text-base md:text-xl font-light pb-4">
                 Hi, I am <span className="text-orange-500">Aryan Bola</span>, 20 years old and a 2nd year student at Kirori Mal College, DU
               </p>
-              <p className="text-base md:text-xl font-light">
+              <p className="text-base md:text-xl font-light pb-4">
                 I am a self-taught creative{" "}
                 <span className="text-orange-500 italic"> Web Developer</span>,{" "}
                 <span className="text-blue-500 italic">Web Designer</span>,

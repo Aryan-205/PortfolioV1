@@ -91,10 +91,10 @@ const TechStackCard = ({ title, Icon, technologies, cols }) => (
 
 export default function TechStack() {
   return (
-    <div className="h-full md:h-screen w-full relative bg-white px-6 md:px-24 pb-6 md:pb-12 pt-4 gap-4 flex flex-col">
+   <div className="w-full relative bg-white px-6 md:px-24 py-4 md:py-12 gap-4 flex flex-col">
       <p className='w-full text-5xl md:text-8xl font-bold tracking-tight'>Skills I Got</p>
-      <div className='h-full w-full'>
-        <section id="tech-stack" className="w-full h-full bg-black text-white p-2 sm:p-4 flex flex-col items-center rounded-3xl ">
+      <div className='w-full'>
+        <section id="tech-stack" className="w-full bg-black text-white p-2 sm:p-4 flex flex-col items-center rounded-3xl ">
             <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
                 {techStack.map((category) => (
                     <TechStackCard

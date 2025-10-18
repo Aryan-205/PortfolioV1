@@ -6,6 +6,10 @@
   text-shadow: 0 0 8px black;
 }
 
+.text-stroke-2 {
+  text-shadow: 0 0 2px white;
+}
+
 .line {
   line-height: 90%;
 }

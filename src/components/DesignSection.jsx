@@ -31,7 +31,7 @@ export default function DesignSection(){
 
   return (
 
-    <div id="section1" className="h-[200vh] w-full bg-black text-white relative rounded-t-3xl">
+    <div id="section1" className="h-[200vh] w-screen bg-black text-white relative rounded-t-3xl">
       <div className='sticky top-0 w-full h-screen inset-0 p-8 md:p-24'>
         <div className='h-full w-full flex flex-col justify-between'>
           <p 
