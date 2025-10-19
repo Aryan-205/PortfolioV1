@@ -101,7 +101,7 @@ export default function ContactMe(){
             href={EMAIL_HREF}
             className="inline-block px-6 py-3 md:px-8 md:py-4 border-4 border-black bg-black text-white text-base md:text-2xl font-extrabold uppercase tracking-wider  hover:bg-gray-800 transition duration-300"
           >
-            SEND MAIL
+            Download CV
           </a>
         </div>
       </div>

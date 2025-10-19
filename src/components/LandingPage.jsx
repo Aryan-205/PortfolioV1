@@ -49,7 +49,7 @@ const NameBlock = ({ text, isStroke }) => {
 export default function LandingPage() {
 
     return (
-        <div className="h-[90vh] md:h-screen w-full bg-white relative flex flex-col overflow-hidden">
+        <div className="h-[90vh] md:h-screen w-full bg-white relative flex flex-col">
             {/* Navigation */}
             <motion.nav 
                 initial={{ y: -100, opacity: 0 }} 
@@ -89,7 +89,7 @@ export default function LandingPage() {
             <div className='w-full flex justify-between items-end px-4 md:px-12 py-4 md:py-8 z-20 absolute bottom-8'>
                 
                 {/* Scroll Button / Music Toggle Icon */}
-                <div className='flex gap-2 justify-center items-center cursor-pointer relative z-50'>
+                <div className='flex gap-2 justify-center cursor-pointer relative z-50'>
                     <AnimatedButton text={"Scroll Down"}/>
                 </div>
                 

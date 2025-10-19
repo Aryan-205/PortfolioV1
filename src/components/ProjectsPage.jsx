@@ -74,18 +74,18 @@ const ProjectItem = ({ title, description, imageSrc, url }) => (
 export default function ProjectsPage() {
   return (
     <>
-      <div className="h-[400vh] md:h-[720vh] w-full bg-black p-6 md:p-24 rounded-t-3xl ">
+      <div style={{ height: `${projectData.length * 120 -100 }vh` }} className="w-full bg-black p-6 md:p-24 rounded-t-3xl ">
         <div className="h-[100vh] z-20 w-fit sticky top-0">
           <div className="border-l border-white w-full h-full flex justify-start items-center">
             <div className="pl-4 backdrop-blur-sm rounded-xl">
-              <p className="w-full text-6xl md:text-[20rem] text-white/50 font-bold ">20</p>
+              <p className="w-full text-6xl md:text-[18rem] text-white/50 font-extrabold ">20</p>
               <p className="w-full h-full text-white text-3xl md:text-6xl font-bold uppercase text-center">Projects</p>
-              <p className="w-full text-6xl md:text-[20rem] text-white/50 font-bold">25</p>
+              <p className="w-full text-6xl md:text-[18rem] text-white/50 font-extrabold">25</p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-start md:items-end justify-start gap-8 sticky top-0 z-10 -mt-[100vh]  md:pt-0">
+        <div className="flex flex-col items-start md:items-end justify-start gap-8 sticky top-0 z-10 -mt-[100vh] md:pt-0">
           {projectData.map((project) => (
             <ProjectItem
               key={project.id} 
