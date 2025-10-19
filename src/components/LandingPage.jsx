@@ -46,7 +46,7 @@ const NameBlock = ({ text, isStroke }) => {
     );
 }
 
-export default function LandingPage() {
+export default function LandingPage({ scrollToAbout, scrollToTechStack, scrollToProjects, scrollToContact }) {
 
     return (
         <div className="h-[90vh] md:h-screen w-full bg-white relative flex flex-col">
@@ -59,16 +59,16 @@ export default function LandingPage() {
             >
                 <p className="font-light tracking-wide text-xl md:text-2xl backdrop-blur-sm">Aryan Bola</p>
                 <div className="flex justify-between items-center space-x-2 md:space-x-4 font-light">
-                    <button onClick={()=>window.scrollTo(0, 9050)} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
+                    <button onClick={scrollToAbout} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
                         About
                     </button>
-                    <button onClick={()=>window.scrollTo(0, 8300)} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
+                    <button onClick={scrollToTechStack} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
                         Tech Stack
                     </button>
-                    <button onClick={()=>window.scrollTo(0, 3800)} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
+                    <button onClick={scrollToProjects} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
                         Projects
                     </button>
-                    <div onClick={()=>window.scrollTo(0, document.body.scrollHeight)}>
+                    <div onClick={scrollToContact}>
                         <AnimatedButton text={"Let's Talk"} className={"h-9 md:h-12 text-xs md:text-base px-4 py-1"}/>
                     </div>
                 </div>
