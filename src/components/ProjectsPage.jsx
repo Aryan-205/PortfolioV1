@@ -36,24 +36,24 @@ const projectData = [
   },
   {
     id: 6,
-    title: "XCard",
-    description: "A tool that helps you simply create X card for yourself",
-    imageSrc: "/projects/Xcard.webp",
-    url: "https://rento-beta.vercel.app/", 
-  },
-  {
-    id: 7,
     title: "TrackO",
     description: "Community live location tracking website",
     imageSrc: "/projects/TrackO.webp",
     url: "https://portfolio-v2-coral-kappa.vercel.app/", 
   },
   {
-    id: 8,
+    id: 7,
     title: "BolaBits",
-    description: "An Component liberary with animated Icons and microinteraction",
+    description: "An Component liberary with animated Components and microinteraction",
     imageSrc: "/projects/ComponentLib.webp",
     url: "https://component-library2-0.vercel.app/", 
+  },
+  {
+    id: 8,
+    title: "Monster Energy",
+    description: "A 3D Commercial Website",
+    imageSrc: "/projects/monsterEnergy.webp",
+    url: "https://monster-energy-3d.vercel.app/", 
   },
 ];
 
@@ -66,7 +66,7 @@ const ProjectItem = ({ title, description, imageSrc, url }) => (
     className="block w-full h-full md:w-[60%] p-2 md:p-4 border-b border-white transition-all duration-300 hover:border-l-4 hover:border-l-white cursor-crosshair"
   >
     <img src={imageSrc} className="w-full" alt={title} />
-    <p className="font-light text-3xl md:text-6xl text-white pt-4">{title}</p>
+    <p className="font-light text-3xl md:text-6xl text-white pt-4 mb-1">{title}</p>
     <p className="text-white text-sm md:text-base text-light">{description}</p>
   </a>
 );

@@ -98,10 +98,11 @@ export default function ContactMe(){
         {/* Send Mail Button - Reduced padding and font size */}
         <div className="pt-8 md:pt-0">
           <a
-            href={EMAIL_HREF}
-            className="inline-block px-6 py-3 md:px-8 md:py-4 border-4 border-black bg-black text-white text-base md:text-2xl font-extrabold uppercase tracking-wider  hover:bg-gray-800 transition duration-300"
+            href="/resume.pdf"
+            className="inline-block px-6 py-3 md:px-8 md:py-4 border-4 border-black bg-black text-white text-base md:text-xl font-extrabold uppercase tracking-wider  hover:bg-gray-800 transition duration-300"
+            download
           >
-            Download CV
+            Download Resume
           </a>
         </div>
       </div>
