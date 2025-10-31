@@ -74,7 +74,7 @@ const ProjectItem = ({ title, description, imageSrc, url }) => (
 export default function ProjectsPage() {
   return (
     <>
-      <div className={`w-full bg-black p-6 md:p-24 rounded-t-3xl h-${projectData.length * 120 -100 }vh`}>
+      <div className={`w-full overflow-x-auto bg-black p-6 md:p-24 rounded-t-3xl h-${projectData.length * 120 -100 }vh`}>
         <div className="h-[100vh] z-20 w-fit sticky top-0">
           <div className="border-l border-white w-full h-full flex justify-start items-center">
             <div className="pl-4 backdrop-blur-sm rounded-xl">
