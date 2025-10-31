@@ -39,11 +39,11 @@ const projectData = [
     title: "TrackO",
     description: "Community live location tracking website",
     imageSrc: "/projects/TrackO.webp",
-    url: "https://portfolio-v2-coral-kappa.vercel.app/", 
+    url: "https://track-o-beige.vercel.app/", 
   },
   {
     id: 7,
-    title: "BolaBits",
+     title: "BolaBits",
     description: "An Component liberary with animated Components and microinteraction",
     imageSrc: "/projects/ComponentLib.webp",
     url: "https://component-library2-0.vercel.app/", 
