@@ -77,7 +77,7 @@ export default function ContactMe(){
               whileInView={{scale:1, opacity:1}}
               transition={{duration:1, ease:"easeInOut"}}
               id="p3"
-              href="https://x.com/BolaJi_69"
+              href="https://x.com/BolatwtX"
               target="_blank"
               rel="noopener noreferrer"
               style={{
