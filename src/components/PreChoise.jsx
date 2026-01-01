@@ -44,7 +44,18 @@ export default function PreChoise(){
             </motion.p>
           </div>
         </div>
-        <p id='p3' className="text-xl md:text-4xl font-light">Get a chance to hire a Designer and Developer both in one</p>
+        <div className='w-full flex flex-col gap-8'>
+          <p className='text-4xl md:text-7xl font-semibold text-left'>Experience</p>
+          <div className="flex items-center gap-4">
+            <div className='flex items-center'>
+              <img src={'BrutanixStudio.png'} className='w-32 h-32 object-cover border-2 bg-black rounded-2xl overflow-hidden' alt="experience"/></div>
+            <div className='h-full flex flex-col justify-between py-4'>
+              <p className='text-3xl font-semibold'>Brutanix Studio</p>
+              <p className='text-xl'>Lead frontend developer</p>
+              <p className='text-base text-gray-500'>December 2025 - Present</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     </>
