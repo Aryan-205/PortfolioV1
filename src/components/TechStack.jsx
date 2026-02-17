@@ -22,8 +22,6 @@ const techStack = [
             { name: "Motion", Icon: TbBrandFramerMotion },
             { name: "Tailwind CSS", Icon: SiTailwindcss },
             { name: "Zustand", Icon: FaGlobe },
-            { name: "Redux", Icon: SiRedux },
-            { name: "HTML5 & CSS3", Icon: SiHtml5 },
             { name: "Vite", Icon: SiVite },
             { name: "ThreeJS", Icon: SiVite },
             { name: "GSAP", Icon: SiVite },
@@ -36,14 +34,12 @@ const techStack = [
         technologies: [
             { name: "Node.js", Icon: SiNodedotjs },
             { name: "Express", Icon: SiExpress },
-            { name: "Python", Icon: SiPython },
             { name: "Zod", Icon: SiZod },
             { name: "JavaScript", Icon: SiJavascript },
             { name: "TypeScript", Icon: SiTypescript },
             { name: "Auth0", Icon: SiAuth0 },
             { name: "JWT", Icon: FaLock },
             { name: "WebSocket", Icon: FaLink },
-            { name: "C++", Icon: SiCplusplus },
         ],
     },
     {

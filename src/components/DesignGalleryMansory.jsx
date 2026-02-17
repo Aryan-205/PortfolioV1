@@ -11,15 +11,6 @@ const DesignCard = ({ design }) => {
     return (
         <motion.div 
             layout
-            initial={{ scale: 0.95 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{
-                type: "spring", 
-                stiffness: 100, 
-                damping: 18,    
-                duration: 0.8   
-            }}
             onClick={()=>console.log(design)}
             className='group transition-all duration-300 ease-in-out overflow-hidden relative mb-4 rounded-sm'>
             <img 
@@ -35,7 +26,7 @@ export default function DesignGalleryMasonry() {
         // Added max-w-6xl for better centering and padding-y for breathing room
         <div className="w-full h-full pt-8 pb-16 px-4 relative">
             <div 
-                className="max-w-6xl columns-2 md:columns-4"
+                className="max-w-6xl xl:max-w-[92rem] columns-2 md:columns-4"
             >
                 {designs.map(design => (
                     <DesignCard key={design.id} design={design} />

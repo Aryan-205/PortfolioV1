@@ -18,7 +18,7 @@ const NameBlock = ({ text, isStroke }) => {
 
     const animateTo = { y: '-100%' };
     const transition = { duration: 0.8, delay: 0.8 };
-    const baseClasses = "text-6xl md:text-8xl lg:text-[12rem] font-extrabold leading-none";
+    const baseClasses = "text-6xl md:text-8xl xl:text-[12rem] font-extrabold leading-none";
     const containerClasses = 'overflow-hidden h-24 md:h-24 lg:h-52'; 
 
     const scrollingLineClasses = isStroke 
