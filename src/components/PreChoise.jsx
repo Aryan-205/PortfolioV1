@@ -1,63 +1,69 @@
-import {motion} from 'motion/react'
+import ExperienceCard from './ExperienceCard';
 
-export default function PreChoise(){
+const experiences = [
+  {
+    id: 1,
+    company: 'Brutanix Studio',
+    role: 'Full Time',
+    dateRange: 'Dec 2025 - Present',
+    isCurrent: true,
+    logo: '',
+    description:
+      'As Lead Frontend Developer, I own the product surface end to end—from architecture through shipping. I built AI integrations with custom outputs, a live event board, and a full card template builder single-handedly, handling responsive UI, API wiring, and production polish.',
+  },
+  {
+    id: 2,
+    company: 'Mazuri Freelance Projects',
+    role: 'Full Stack Developer',
+    dateRange: 'April 2026 - Present',
+    isCurrent: true,
+    logo: '',
+    description:
+      'Delivered a restaurant website on the frontend and wired up integrations so the team can update menus, pricing, and content on their own. Focused on a clean, mobile-friendly experience they can maintain without a developer for every small change.',
+  },
+  {
+    id: 3,
+    company: 'Croco Studio Freelance Work',
+    role: 'Full Stack Developer',
+    dateRange: 'April 2026 - Present',
+    isCurrent: true,
+    logo: '',
+    description:
+      'Collaborated with a design studio to build their landing page—working closely on layout, motion, and brand details to match their vision. Handled the frontend implementation end to end and shipped a responsive, polished site ready for production.',
+  },
+  {
+    id: 4,
+    company: 'Real World Sales Pitch Experience',
+    role: 'Full Time',
+    dateRange: 'April, May 2026',
+    isCurrent: true,
+    logo: '',
+    description:
+      'Met potential clients in person to deliver real-world sales pitches for studio work—presenting projects, walking through value and timelines, and answering technical and business questions on the spot. Learned how to build trust and turn interest into committed work face to face.',
+  },
+];
 
+export default function PreChoise() {
   return (
-    <>
-    <div id="section" className="h-[50vh] md:h-screen w-full bg-white relative p-4 md:p-24 overflow-hidden">
-      <div className='flex flex-col justify-between border-x border-black px-2 md:px-4 w-full h-full'>
-        <div className='flex flex-col justify-between'>
-          <div className='flex justify-between'>
-            <motion.p 
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              className='text-5xl md:text-9xl font-bold'
-            >
-              01
-            </motion.p>
-            <motion.p 
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              className='text-5xl md:text-9xl font-light'
-            >
-              Designer
-            </motion.p>
-          </div>
-          <div className='flex justify-between'>
-            <motion.p 
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              className='text-5xl md:text-9xl font-bold'
-            >
-              02
-            </motion.p>
-            <motion.p 
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              className='text-5xl md:text-9xl font-light'
-            >
-              Developer
-            </motion.p>
+    <section
+      id="section"
+      className="w-full bg-white relative px-4 md:px-24 py-12 md:py-20 overflow-hidden"
+    >
+      <div className="border-x border-dashed border-neutral-300 px-4 md:px-8">
+        <div className="border-t border-dashed border-neutral-300 pt-8 md:pt-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-black tracking-tight">
+            Work Experience
+          </h2>
+
+          <div className="mt-8 md:mt-10 flex flex-col gap-10 md:gap-12">
+            {experiences.map((exp) => (
+              <ExperienceCard key={exp.company} {...exp} />
+            ))}
           </div>
         </div>
-        <div className='w-full flex flex-col gap-8'>
-          <p className='text-4xl md:text-7xl font-semibold text-left'>Experience</p>
-          <div className="flex items-center gap-4">
-            <div className='flex items-center'>
-              <img src={'BrutanixStudio.png'} className='w-32 h-32 object-cover border-2 bg-black rounded-2xl overflow-hidden' alt="experience"/></div>
-            <div className='h-full flex flex-col justify-between py-4'>
-              <p className='text-3xl font-semibold'>Brutanix Studio</p>
-              <p className='text-xl'>Lead frontend developer</p>
-              <p className='text-base text-gray-500'>December 2025 - Present</p>
-            </div>
-          </div>
-        </div>
+
+        <div className="border-t border-dashed border-neutral-300 mt-8 md:mt-10" />
       </div>
-    </div>
-    </>
-  )
+    </section>
+  );
 }
