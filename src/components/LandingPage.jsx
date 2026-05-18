@@ -1,5 +1,6 @@
-import { motion, scale } from 'framer-motion';
-import { useState } from 'react';
+import { motion } from 'motion/react';
+import Navbar from './Navbar';
+import PhotoStack from './PhotoStack';
 
 const AnimatedButton = ({ text, className }) => {
     return (
@@ -13,78 +14,28 @@ const AnimatedButton = ({ text, className }) => {
     );
 };
 
+const MeImages = [
+    "/me/Me1.jpeg",
+    "/me/Me3.jpeg",
+    "/me/Me2.JPG",
+]
 
-const NameBlock = ({ text, isStroke }) => { 
-
-    const animateTo = { y: '-100%' };
-    const transition = { duration: 0.8, delay: 0.8 };
-    const baseClasses = "text-6xl md:text-8xl xl:text-[12rem] font-extrabold leading-none";
-    const containerClasses = 'overflow-hidden h-24 md:h-24 lg:h-52'; 
-
-    const scrollingLineClasses = isStroke 
-        ? 'text-stroke-3 text-white' 
-        : 'text-black'; 
-
-    return (
-        <div className={containerClasses}>
-            <motion.p 
-                initial={{y: 100}} 
-                animate={animateTo} 
-                transition={transition} 
-                className={`${baseClasses} text-white opacity-0`}
-            >
-                {text}
-            </motion.p>
-            <motion.p 
-                initial={{y: 100}} 
-                animate={animateTo} 
-                transition={transition} 
-                className={`${baseClasses} ${scrollingLineClasses}`} 
-            >
-                {text}
-            </motion.p>
-        </div>
-    );
-}
+const bookImages = [
+    "/books/book2.png",
+    "/books/book1.png",
+    "/books/book3.png",
+]
 
 export default function LandingPage({ scrollToAbout, scrollToTechStack, scrollToProjects, scrollToContact }) {
 
     return (
         <div className="h-[90vh] md:h-screen w-full bg-white relative flex flex-col">
             {/* Navigation */}
-            <motion.nav 
-                initial={{ y: -100, opacity: 0 }} 
-                animate={{ y: 0, opacity: 1 }} 
-                transition={{ duration: 0.5 }} 
-                className="w-full flex justify-between items-center px-4 md:px-12 py-6 text-sm md:text-xl z-20 absolute top-0 bg-transparent text-black "
-            >
-                <p className="font-semibold tracking-wide text-xl md:text-2xl backdrop-blur-sm">Aryan Bola</p>
+            <Navbar scrollToAbout={scrollToAbout} scrollToTechStack={scrollToTechStack} scrollToProjects={scrollToProjects} scrollToContact={scrollToContact} />
 
-                <div className="flex justify-between items-center space-x-2 md:space-x-4 font-light">
-                    <button onClick={scrollToAbout} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
-                        About
-                    </button>
-                    <button onClick={scrollToTechStack} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
-                        Tech Stack
-                    </button>
-                    <button onClick={scrollToProjects} className='hidden sm:block hover:border-black hover:border transition duration-300 cursor-pointer px-2 py-1 md:px-4 md:py-1 rounded-full backdrop-blur-sm'>
-                        Projects
-                    </button>
-                    <div onClick={scrollToContact}>
-                        <AnimatedButton text={"Let's Talk"} className={"h-9 md:h-12 text-xs md:text-base px-4 py-1"}/>
-                    </div>
-                </div>
-            </motion.nav>
-            
-            <div className='absolute inset-0 w-full h-full flex justify-center items-center'>
-                <motion.img initial={{scale:5, zIndex:10}} animate={{scale:1, zIndex:0}} transition={{duration:0.8, ease:"easeInOut"}} src="/bg3.jpeg" className='w-[24rem] lg:w-[42.2rem] h-[18rem] lg:h-[35rem]' alt="" />
-            </div>
-
-            {/* Central Name Text Blocks */}
-            <div className="flex flex-col justify-center items-center w-full flex-grow px-4 md:px-24 z-10 text-white">
-                <NameBlock text={"Aryan Bola"} isStroke={false} />
-                <NameBlock text={"Aryan Bola"} isStroke={true} />
-                <NameBlock text={"Aryan Bola"} isStroke={false} />
+            <div className="flex h-full w-full justify-center items-center overflow-visible px-8">
+                <PhotoStack images={MeImages} className="w-20 h-20 rounded-2xl" />
+                <PhotoStack images={bookImages} className="w-12 h-auto rounded-lg" />
             </div>
 
             {/* Footer Elements */}
@@ -93,13 +44,6 @@ export default function LandingPage({ scrollToAbout, scrollToTechStack, scrollTo
                 {/* Scroll Button / Music Toggle Icon */}
                 <div className='flex gap-2 justify-center cursor-pointer relative z-50'>
                     <AnimatedButton text={"Open to work"} className={"text-xs rounded-full"}/>
-                </div>
-                
-                {/* Web Developer Text */}
-                {/* text shadow */}
-                <div className='px-8 md:px-24 absolute bottom-0 right-0 z-40 overflow-hidden '>
-                    <motion.p initial={{ x: -500, visibility: false }} animate={{ x: 0 }} transition={{ duration: 0.8, delay: 1.2 }} className='text-2xl md:text-4xl font-semibold text-black italic text-stroke-2'>//Web Developer</motion.p>
-                    <motion.p initial={{ x: -500, visibility: false }} animate={{ x: 0 }} transition={{ duration: 0.8, delay: 1.2 }} className='text-2xl md:text-4xl font-semibold text-black italic text-stroke-2'>//Web Designer</motion.p>
                 </div>
             </div>
         </div>
