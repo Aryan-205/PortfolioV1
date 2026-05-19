@@ -1,145 +1,140 @@
-import { motion } from "motion/react";
+import { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "motion/react";
+import { File, Mail } from "lucide-react";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
 
-export default function ContactMe(){
+const socialLinks = [
+  {
+    id: 1,
+    href: "mailto:aaryann5002@gmail.com",
+    icon: <Mail strokeWidth={1.5} />,
+    label: "EMAIL",
+    preview: {
+      title: "aaryann5002@gmail.com",
+      sub: "Drop me a message anytime",
+      bg: "bg-red-50",
+      accent: "text-red-500",
+    },
+  },
+  {
+    id: 2,
+    href: "https://www.linkedin.com/in/aryan-bola-a95913316/",
+    icon: <FaLinkedin strokeWidth={1.5} />,
+    label: "LINKEDIN",
+    preview: {
+      title: "Aryan Bola",
+      sub: "Connect with me on LinkedIn",
+      bg: "bg-blue-50",
+      accent: "text-blue-600",
+    },
+  },
+  {
+    id: 3,
+    href: "",
+    icon: <File strokeWidth={1.5} />,
+    label: "RESUME",
+    preview: {
+      title: "My Resume",
+      sub: "View my work & experience",
+      bg: "bg-neutral-100",
+      accent: "text-neutral-700",
+    },
+  },
+  {
+    id: 4,
+    href: "https://github.com/Aryan-205",
+    icon: <SiGithub />,
+    label: "GITHUB",
+    preview: {
+      title: "Aryan-205",
+      sub: "Check out my projects",
+      bg: "bg-zinc-900",
+      accent: "text-white",
+      dark: true,
+    },
+  },
+  {
+    id: 5,
+    href: "https://x.com/BolatwtX",
+    icon: <FaTwitter strokeWidth={1.5} />,
+    label: "TWITTER / X",
+    preview: {
+      title: "@BolatwtX",
+      sub: "Follow me on X",
+      bg: "bg-sky-50",
+      accent: "text-sky-500",
+    },
+  },
+];
 
-  const EMAIL_HREF = 'mailto:aaryann5002@gmail.com'; 
+function SocialItem({ link }) {
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
+
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+
+  const x = useSpring(rawX, { stiffness: 300, damping: 28 });
+  const y = useSpring(rawY, { stiffness: 300, damping: 28 });
+
+  const handleMouseMove = (e) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    rawX.set(e.clientX - rect.left + 16);
+    rawY.set(e.clientY - rect.top - 60);
+  };
+
+  const { preview } = link;
 
   return (
-    // Reduced padding and main container to flex-col on small screens
-    <section id='section' className="h-full md:h-screen bg-white text-black px-6 md:px-24 py-8 font-sans flex flex-col md:flex-row  overflow-hidden">
-      
-      {/* Contact Links Column - Adjusted height and alignment */}
-      <div className="h-full flex flex-col justify-start md:justify-between w-full md:w-auto">
-        {/* Reduced heading size */}
-        <p className="text-xl md:text-4xl font-bold text-white w-fit px-2 py-1 md:px-4 md:py-2 tracking-tighter bg-black mb-8 md:mb-0">Contact Me</p>
-        
-        {/* List of Contact Links - Reduced gap and text size */}
-        <div className="flex flex-col justify-start md:justify-center gap-4 md:gap-8 items-start h-full w-full">
-            <motion.a
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              id="p0"
-              href="mailto:aaryann5002@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                borderBottom: '4px solid black',
-                lineHeight: 1.1,
-              }}
-            >
-              {/* Reduced text size */}
-              <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase text-black hover:text-white hover:bg-black transition duration-300">
-                EMAIL
-              </p>
-            </motion.a>
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onMouseMove={handleMouseMove}
+    >
+      <motion.a
+        href={link.href || undefined}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex flex-col items-center justify-center gap-3 px-5 py-3 border border-dashed border-black rounded-xl cursor-pointer select-none group"
+        whileHover={{ backgroundColor: "#000", color: "#fff" }}
+        transition={{ duration: 0.2 }}
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+      >
+        <span className="w-5 h-5">{link.icon}</span>
+      </motion.a>
 
-            <motion.a
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              id="p1"
-              href="https://www.linkedin.com/in/aryan-bola-a95913316/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                borderBottom: '4px solid black',
-                lineHeight: 1.1,
-              }}
-            >
-              {/* Reduced text size */}
-              <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase text-black hover:text-white hover:bg-black transition duration-300">
-                LINKEDIN
-              </p>
-            </motion.a>
+      {/* Cursor-following tooltip card */}
+      <motion.div
+        className={`pointer-events-none absolute z-50 w-56 rounded-2xl p-4 shadow-xl ${preview.bg} ${preview.dark ? "border border-white/10" : "border border-black/10"}`}
+        style={{ x, y, top: 0, left: 0 }}
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={hovered ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
+        transition={{ duration: 0.18 }}
+      >
+        <p className={`text-base font-bold ${preview.accent}`}>{preview.title}</p>
+        <p className={`text-xs mt-1 ${preview.dark ? "text-white/60" : "text-black/50"}`}>{preview.sub}</p>
+      </motion.div>
+    </div>
+  );
+}
 
-            <motion.a
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              id="p2"
-              href="https://github.com/Aryan-205"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                borderBottom: '4px solid black',
-                lineHeight: 1.1,
-              }}
-            >
-              {/* Reduced text size */}
-              <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase text-black hover:text-white hover:bg-black transition duration-300">
-                GITHUB
-              </p>
-            </motion.a>
-
-            <motion.a
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              id="p3"
-              href="https://x.com/BolatwtX"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                borderBottom: '4px solid black',
-                lineHeight: 1.1,
-              }}
-              className="relative"
-            >
-              {/* Reduced text size */}
-              <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase text-black hover:text-white hover:bg-black transition duration-300">
-                TWITTER
-              </p>
-              {/* Reduced text and padding */}
-              <p className="absolute bg-black text-green-500 px-2 -bottom-7 md:-bottom-8 right-0 p-1 text-xs md:text-base">Most Active</p>
-            </motion.a>
-        </div>
-
-        {/* Send Mail Button - Reduced padding and font size */}
-        <div className="pt-8 md:pt-0">
-          <a
-            href="/resume.pdf"
-            className="inline-block px-6 py-3 md:px-8 md:py-4 border-4 border-black bg-black text-white text-base md:text-xl font-extrabold uppercase tracking-wider  hover:bg-gray-800 transition duration-300"
-            download
-          >
-            Download Resume
-          </a>
-        </div>
+export default function ContactMe() {
+  return (
+    <section
+      id="contact"
+      className="bg-transparent text-black px-6 md:px-24 py-12 font-sans flex flex-col justify-center gap-10 w-full"
+    >
+      <div className="flex justify-between w-full gap-3">
+        {socialLinks.map((link) => (
+          <SocialItem key={link.id} link={link} />
+        ))}
       </div>
-      
-      {/* Message Column - Reduced text size and width */}
-      <div className="flex justify-start md:justify-center tracking-tight text-2xl md:text-6xl flex-col items-start md:items-end gap-4 md:gap-8 font-light w-full pt-12 md:pt-0">
-        <motion.p
-          initial={{scale:1.5,opacity:0}}
-          whileInView={{scale:1, opacity:1}}
-          transition={{duration:1, ease:"easeInOut"}}
-        >
-          Got a project in mind?
-        </motion.p>
-        <motion.p  
-          initial={{scale:1.5,opacity:0}}
-          whileInView={{scale:1, opacity:1}}
-          transition={{duration:1, ease:"easeInOut"}}
-        >
-          Want to talk tech stack?
-        </motion.p>
-        <motion.p
-          initial={{scale:1.5,opacity:0}}
-          whileInView={{scale:1, opacity:1}}
-          transition={{duration:1, ease:"easeInOut"}}
-        >
-          My inbox is always open.
-        </motion.p>
-        <motion.p
-          initial={{scale:1.5,opacity:0}}
-          whileInView={{scale:1, opacity:1}}
-          transition={{duration:1, ease:"easeInOut"}}
-          className="w-full md:w-[40rem] text-start md:text-end"
-        >
-          Find me across the web, or drop me a direct line.
-        </motion.p>
-      </div>
-      
     </section>
   );
-};
+}

@@ -52,20 +52,20 @@ export default function App() {
     <>
       <div className="w-full relative">
         <LandingPage {...navProps} />
+        <div ref={techStackRef}>
+          <TechStack />
+        </div>
         <PreChoise />
+        <div ref={contactRef}>
+          <ContactMe />
+        </div>
         <DesignSection />
         <DesignSection2 />
         <div ref={projectsRef}>
           <ProjectsPage />
         </div>
-        <div ref={techStackRef}>
-          <TechStack />
-        </div>
         <div ref={aboutRef}>
           <About />
-        </div>
-        <div ref={contactRef}>
-          <ContactMe />
         </div>
       </div>
 
