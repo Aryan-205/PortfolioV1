@@ -5,11 +5,9 @@ import GitHubActivityCard from "./GithubCard";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { FlipButton } from "./FlipButton";
 
 const MeImages = ["/me/Me1.jpeg", "/me/Me3.jpeg", "/me/Me2.JPG"];
 
@@ -107,12 +105,7 @@ export default function LandingPage({
 
             <div className="w-full h-full flex flex-col gap-2">
               {roles.map((role, index) => (
-                <p
-                  key={index}
-                  className="text-xl font-medium uppercase leading-none tracking-wider text-neutral-900 text-left"
-                >
-                  &#8226; {role}
-                </p>
+                <FlipButton key={index} text={role} />
               ))}
             </div>
           </div>

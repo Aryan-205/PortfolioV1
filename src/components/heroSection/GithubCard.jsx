@@ -150,7 +150,8 @@ export default function GitHubActivityCard() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="w-full max-w-sm rounded-2xl bg-neutral-800 p-4 md:p-5 text-white shadow-sm border border-neutral-700"
+      className="w-full max-w-sm rounded-2xl bg-neutral-800 p-4 md:p-5 text-white shadow-sm border border-neutral-700 cursor-pointer"
+      onClick={() => window.open(`https://github.com/${USERNAME}`, "_blank")}
     >
       <motion.div className="mb-3 flex items-center justify-between text-xs">
         <span className="font-medium tracking-wide">GitHub Activity</span>

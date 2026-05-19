@@ -67,7 +67,7 @@ const techStack = [
 ];
 
 const TechStackCard = ({ title, Icon, technologies, cols }) => (
-    <div className={`group p-4 sm:p-8 border border-white rounded-2xl bg-white text-black transition duration-500 ease-in-out hover:bg-white hover:text-black shadow-2xl`}>
+    <div className={`group p-4 sm:p-8 border border-white rounded-2xl text-black transition duration-500 ease-in-out hover:bg-white hover:text-black shadow-2xl landing-grid-bg`}>
         <div className="flex items-center space-x-4 mb-4 sm:mb-6">
             <Icon className="w-6 h-6 sm:w-8 sm:h-8 stroke-black transition duration-500" />
             <h2 className="text-xl sm:text-3xl font-black uppercase tracking-wider">{title}</h2>
@@ -75,7 +75,7 @@ const TechStackCard = ({ title, Icon, technologies, cols }) => (
 
         <div className={`grid grid-cols-2 lg:grid-cols-${cols} gap-3`}>
             {technologies.map((tech) => (
-                <div key={tech.name} className="flex items-center space-x-3 text-sm sm:text-lg font-semibold">
+                <div key={tech.name} className="flex items-center space-x-3 text-sm sm:text-lg bg-[#EFEEEF] rounded-xl p-4 ring-2 ring-neutral-300 ring-offset-2 ring-offset-white cursor-pointer hover:bg-white hover:text-black">
                     <tech.Icon className="w-4 h-4 sm:w-5 sm:h-5 text-black transition duration-500" />
                     <span>{tech.name}</span>
                 </div>
