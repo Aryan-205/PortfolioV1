@@ -19,6 +19,7 @@ function CompanyLogo({ src, company }) {
 export default function ExperienceCard({
   company,
   role,
+  type,
   dateRange,
   description,
   logo,
@@ -34,6 +35,8 @@ export default function ExperienceCard({
             <span className="font-semibold text-black text-base md:text-lg">{company}</span>
             <span className="text-neutral-300 select-none" aria-hidden>|</span>
             <span className="text-neutral-500 text-base md:text-lg">{role}</span>
+            <span className="text-neutral-300 select-none" aria-hidden>|</span>
+            <span className="text-neutral-500 text-base md:text-lg">{type}</span>
             {isCurrent && (
               <span
                 className="w-2 h-2 rounded-full bg-lime-500 shrink-0"
@@ -41,9 +44,9 @@ export default function ExperienceCard({
               />
             )}
           </div>
-          <p className="text-neutral-500 text-sm md:text-base sm:text-right shrink-0">
+          { isCurrent && (<p className="text-neutral-500 text-sm md:text-base sm:text-right shrink-0">
             {dateRange}
-          </p>
+          </p>)}
         </div>
 
         <p className="mt-2 md:mt-3 text-neutral-500 text-sm md:text-[15px] leading-relaxed">
