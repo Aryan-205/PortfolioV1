@@ -42,91 +42,104 @@ export default function LandingPage({
   scrollToContact,
 }) {
   return (
-    <div className="landing-grid-bg relative flex min-h-[90vh] flex-col md:min-h-screen">
+    <motion.div className="landing-grid-bg relative flex min-h-[90vh] flex-col md:min-h-screen">
       <Navbar
         scrollToAbout={scrollToAbout}
         scrollToProjects={scrollToProjects}
         scrollToContact={scrollToContact}
       />
 
-      <main className="relative z-10 mx-4 mb-8 flex flex-1 flex-col rounded-3xl border border-dashed border-neutral-400/80 bg-[#f7f7f5]/90 px-5 py-8 md:mx-10 md:px-12 md:py-12">
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-[clamp(3rem,12vw,9rem)] font-black uppercase leading-[0.9] tracking-light flex items-center gap-2 text-neutral-900"
-        >
-          Aryan Bola<span className="text-neutral-500"></span>
-        </motion.h1>
+      <main className="relative z-10 mx-3 mb-6 flex flex-1 flex-col gap-10 rounded-3xl border border-dashed border-neutral-400/80 bg-[#f7f7f5]/90 px-4 py-6 sm:mx-4 sm:px-5 sm:py-8 md:mx-10 md:gap-12 md:px-12 md:py-12">
+        <div className="flex flex-col items-start gap-3 sm:gap-4">
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-[clamp(2.5rem,11vw,9rem)] font-black uppercase leading-[0.9] tracking-tight text-neutral-900"
+          >
+            Aryan Bola
+          </motion.h1>
 
-        <p className="mt-4 max-w-xl text-sm text-neutral-600 md:text-base">
-          Helping startups go from 0 to 1
-          <br />
-          Building{" "}
-          <span className="rounded-full border border-dashed border-neutral-400 bg-white px-2 py-0.5 text-neutral-800">
-            Web
-          </span>{" and "}
-          <span className="rounded-full border border-dashed border-neutral-400 bg-white px-2 py-0.5 text-neutral-800">
-            App
-          </span>{" "}
-          products with clean UI and solid backend architecture.
-        </p>
+          <p className="max-w-xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+            Helping startups go from 0 to 1
+            <br />
+            Building{" "}
+            <span className="rounded-full border border-dashed border-neutral-400 bg-white px-2 py-0.5 text-neutral-800">
+              Web
+            </span>{" "}
+            and{" "}
+            <span className="rounded-full border border-dashed border-neutral-400 bg-white px-2 py-0.5 text-neutral-800">
+              App
+            </span>{" "}
+            products with clean UI and solid backend architecture.
+          </p>
+        </div>
 
-        <div className="mt-10 flex justify-between items-center">
-          <div className="flex flex-col items-center gap-8 lg:items-start">
-            <div className="w-full rounded-2xl border border-dashed border-neutral-400 bg-white/60 p-4">
-              <p className="mb-3 text-xs font-medium uppercase tracking-widest text-neutral-800">
-                Things I love
-              </p>
-              <div className="flex justify-center items-center gap-4">
-                {thingsILove.map((item) => (
-                  <Dialog key={item.id}>
-                    <DialogTrigger className="flex flex-col items-center justify-center gap-2 rounded-md outline-none transition-transform duration-300 hover:scale-110 focus-visible:ring-2 focus-visible:ring-neutral-400 cursor-pointer">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="h-20 w-16 rounded-md object-cover"
-                      />
-                      <p className="text-xs font-medium tracking-wide text-neutral-800">
-                        {item.name}
-                      </p>
-                    </DialogTrigger>
-                    <DialogContent className="overflow-hidden border-neutral-200 p-0">
-                        <img
-                            src={item.image}
-                            alt={item.name}
-                            className="max-h-[70vh] w-full object-contain bg-neutral-100"
-                        />
-                    </DialogContent>
-                  </Dialog>
-                ))}
-              </div>
-            </div>
-
-            <div className="w-full h-full flex flex-col gap-2">
-              {roles.map((role, index) => (
-                <FlipButton key={index} text={role} />
-              ))}
-            </div>
-          </div>
-
+        <div className="flex flex-col items-center gap-10 sm:gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+          {/* Photo — first on mobile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex justify-center"
+            className="order-1 flex w-full justify-center lg:order-2 lg:w-auto lg:shrink-0"
           >
             <PhotoStack
               images={MeImages}
-              className="h-56 w-48 rounded-2xl md:h-64 md:w-56"
-              containerClassName="py-6 px-14"
+              className="h-48 w-40 rounded-2xl sm:h-56 sm:w-48 md:h-64 md:w-56"
+              containerClassName="py-4 px-8 sm:py-6 sm:px-14"
               alt="Aryan Bola"
             />
           </motion.div>
 
-          <GitHubActivityCard />
+          {/* Things I love + roles */}
+          <div className="order-2 flex w-full max-w-md flex-col items-center gap-6 sm:gap-8 lg:order-1 lg:max-w-xs lg:items-start">
+            <div className="w-full rounded-2xl border border-dashed border-neutral-400 bg-white/60 p-3 sm:p-4">
+              <p className="mb-3 text-center text-xs font-medium uppercase tracking-widest text-neutral-800 lg:text-left">
+                Things I love
+              </p>
+              <motion.div className="grid grid-cols-4 gap-2 sm:gap-4">
+                {thingsILove.map((item) => (
+                  <Dialog key={item.id}>
+                    <DialogTrigger className="flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-md outline-none transition-transform duration-300 hover:scale-105 focus-visible:ring-2 focus-visible:ring-neutral-400 sm:gap-2 sm:hover:scale-110">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-14 w-11 rounded-md object-cover sm:h-20 sm:w-16"
+                      />
+                      <p className="text-[10px] font-medium tracking-wide text-neutral-800 sm:text-xs">
+                        {item.name}
+                      </p>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-[calc(100%-1.5rem)] overflow-hidden border-neutral-200 p-0 sm:max-w-lg">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="max-h-[70vh] w-full object-contain bg-neutral-100"
+                      />
+                    </DialogContent>
+                  </Dialog>
+                ))}
+              </motion.div>
+            </div>
+
+            <div className="flex w-full flex-col items-center gap-1 sm:gap-2 lg:items-start">
+              {roles.map((role, index) => (
+                <FlipButton
+                  key={index}
+                  text={role}
+                  className="text-base sm:text-lg md:text-xl"
+                  uppercase={false}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* GitHub card */}
+          <div className="order-3 flex w-full justify-center lg:order-3 lg:w-auto lg:justify-end">
+            <GitHubActivityCard />
+          </div>
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 }
