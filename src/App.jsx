@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
-import About from "./components/About";
 import ContactMe from "./components/ContactMe";
 import DesignSection from "./components/DesignSection";
 import DesignSection2 from "./components/DesignSection2";
@@ -63,9 +62,6 @@ export default function App() {
         <DesignSection2 />
         <div ref={projectsRef}>
           <ProjectsPage />
-        </div>
-        <div ref={aboutRef}>
-          <About />
         </div>
       </div>
 
