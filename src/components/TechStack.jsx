@@ -73,7 +73,8 @@ import {
     SiFramer, SiJavascript, SiCplusplus, SiZod
   } from 'react-icons/si';
   import { TbBrandFramerMotion } from "react-icons/tb";
-  import { FaReact, FaLock, FaLink, FaDatabase, FaGlobe } from 'react-icons/fa';
+  import { FaReact, FaLock, FaLink, FaDatabase, FaGlobe, FaLaugh, FaBook, FaBrain } from 'react-icons/fa';
+  import { SiExpo } from 'react-icons/si';
   
   const techs = [
     { name: "React",        Icon: FaReact },
@@ -81,12 +82,13 @@ import {
     { name: "Motion",       Icon: TbBrandFramerMotion },
     { name: "Tailwind CSS", Icon: SiTailwindcss },
     { name: "Zustand",      Icon: FaGlobe },
-    { name: "Vite",         Icon: SiVite },
+    { name: "Expo",         Icon: SiExpo },
     { name: "ThreeJS",      Icon: SiVite },
     { name: "GSAP",         Icon: SiVite },
     { name: "Node.js",      Icon: SiNodedotjs },
     { name: "Express",      Icon: SiExpress },
     { name: "Zod",          Icon: SiZod },
+    { name: "Tanstack Query",      Icon: FaReact },
     { name: "JavaScript",   Icon: SiJavascript },
     { name: "TypeScript",   Icon: SiTypescript },
     { name: "Auth0",        Icon: SiAuth0 },
@@ -100,17 +102,20 @@ import {
     { name: "Framer",       Icon: SiFramer },
     { name: "Figma",        Icon: SiFigma },
     { name: "Canva",        Icon: SiCanva },
+    { name: "Funny",        Icon: FaLaugh },
+    { name: "Endless Stories",        Icon: FaBook },
+    { name: "Learn anything quickly",        Icon: FaBrain },
   ];
   
   export default function TechStack() {
     return (
-      <div className="w-full bg-red-500 px-6 md:px-24 py-4 md:py-12 flex flex-col gap-6">
+      <div className="w-full landing-grid-bg p-10 flex flex-col gap-6">
         <p className="text-5xl md:text-4xl tracking-tight">Skills I Got</p>
         <div className="flex flex-wrap gap-3">
           {techs.map(({ name, Icon }) => (
             <div
               key={name}
-              className="flex items-center gap-2 px-4 py-2 border border-neutral-200 rounded-xl bg-neutral-50 hover:bg-black hover:text-white hover:border-black transition duration-200 cursor-pointer text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-2 border border-neutral-300 rounded-xl bg-neutral-50 hover:bg-black hover:text-white hover:border-black transition duration-200 cursor-pointer text-sm font-medium shadow-[0_0_10px_0_rgba(0,0,0,0.1), inset_0_4_10px_0_rgba(0,0,0,0.1)]"
             >
               <Icon className="w-4 h-4 shrink-0" />
               <span>{name}</span>
