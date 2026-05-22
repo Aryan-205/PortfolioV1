@@ -1,22 +1,22 @@
 import { motion } from "motion/react";
 import { FlipButton } from "./heroSection/FlipButton";
 
-export default function Navbar({ scrollToAbout, scrollToProjects, scrollToContact }) {
+export default function Navbar() {
   const navItems = [
     {
       id: 1,
       name: "Projects",
-      onClick: scrollToProjects,
+      href: "/projects",
     },
     {
       id: 2,
-      name: "Contact",
-      onClick: scrollToContact,
+      name: "Blogs",
+      href: "/blogs",
     },
     {
       id: 3,
-      name: "About",
-      onClick: scrollToAbout,
+      name: "Designs",
+      href: "/designs",
     },
   ];
 
@@ -29,16 +29,16 @@ export default function Navbar({ scrollToAbout, scrollToProjects, scrollToContac
     >
       <p className="text-lg font-semibold tracking-tight md:text-xl">AB</p>
 
-      <motion.div className="flex items-center gap-1 md:gap-2">
+      <div className="flex items-center gap-1 md:gap-2">
         {navItems.map((item) => (
           <FlipButton
             key={item.id}
             text={item.name}
-            onClick={item.onClick}
+            href={item.href}
             className="text-sm font-light md:text-base"
           />
         ))}
-      </motion.div>
+      </div>
     </motion.nav>
   );
 }

@@ -1,34 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import ContactMe from "@/components/ContactMe";
 import Intro from "@/components/Intro";
 import LandingPage from "@/components/heroSection/LandingPage";
 import PreChoise from "@/components/Experience";
-import ProjectsPage from "@/components/ProjectsPage";
 import ProofOfWork from "@/components/ProofOfWork";
 import TechStack from "@/components/TechStack";
 import Navbar from "@/components/Navbar";
 
 const INTRO_DISPLAY_MS = 2000;
+const INTRO_STORAGE_KEY = "portfolio-intro-seen";
 
 export default function Home() {
-  const [showIntro, setShowIntro] = useState(true);
-
-  const aboutRef = useRef(null);
-  const techStackRef = useRef(null);
-  const projectsRef = useRef(null);
-  const contactRef = useRef(null);
-
-  const scrollToSection = (ref) => {
-    ref.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+  const [showIntro, setShowIntro] = useState(false);
+  const [introAnimates, setIntroAnimates] = useState(false);
 
   useEffect(() => {
+    const hasSeenIntro = sessionStorage.getItem(INTRO_STORAGE_KEY);
+    if (hasSeenIntro) return;
+
+    sessionStorage.setItem(INTRO_STORAGE_KEY, "true");
+    setIntroAnimates(true);
+    setShowIntro(true);
+
     const timer = setTimeout(() => setShowIntro(false), INTRO_DISPLAY_MS);
     return () => clearTimeout(timer);
   }, []);
@@ -40,33 +36,20 @@ export default function Home() {
     };
   }, [showIntro]);
 
-  const navProps = {
-    scrollToAbout: () => scrollToSection(aboutRef),
-    scrollToTechStack: () => scrollToSection(techStackRef),
-    scrollToProjects: () => scrollToSection(projectsRef),
-    scrollToContact: () => scrollToSection(contactRef),
-  };
-
   return (
     <>
       <div className="landing-grid-bg relative w-full overflow-x-hidden px-10">
-        <Navbar
-          scrollToAbout={() => scrollToSection(aboutRef)}
-          scrollToProjects={() => scrollToSection(projectsRef)}
-          scrollToContact={() => scrollToSection(contactRef)}
-        />
-        <LandingPage {...navProps} />
-        <div ref={techStackRef}>
-          <TechStack />
-        </div>
+        <Navbar />
+        <LandingPage />
+        <TechStack />
         <PreChoise />
         <ProofOfWork />
-        <div ref={contactRef}>
-          <ContactMe />
-        </div>
+        <ContactMe />
       </div>
 
-      <AnimatePresence>{showIntro && <Intro key="intro" />}</AnimatePresence>
+      <AnimatePresence>
+        {showIntro && <Intro key="intro" animate={introAnimates} />}
+      </AnimatePresence>
     </>
   );
 }

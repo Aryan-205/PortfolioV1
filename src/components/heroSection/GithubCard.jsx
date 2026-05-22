@@ -1,10 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import { GitHubCalendar } from "react-github-calendar";
+import { ActivityCalendar } from "react-activity-calendar";
 import "react-github-calendar/tooltips.css";
+import {
+  fetchGitHubContributions,
+  GITHUB_USERNAME,
+  GITHUB_YEAR,
+} from "@/lib/githubContributions";
 
-const USERNAME = "Aryan-205";
-const YEAR = 2026;
+const USERNAME = GITHUB_USERNAME;
+const YEAR = GITHUB_YEAR;
 const BLOCK_MARGIN = 3;
 const WEEK_START = 0;
 
@@ -47,7 +52,6 @@ function eachDay(from, to) {
   return days;
 }
 
-/** Week columns from the week containing Jan 1 through today (today = last day). */
 function getYearToDateWeekCount() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -132,25 +136,53 @@ export default function GitHubActivityCard() {
   const weekCount = getYearToDateWeekCount();
   const blockSize = getBlockSize(containerWidth, weekCount);
 
+  const [calendarData, setCalendarData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [totalContributions, setTotalContributions] = useState(null);
   const [longestStreak, setLongestStreak] = useState(null);
 
-  const transformData = useCallback((data) => {
+  const applyContributions = useCallback((contributions) => {
     const { start, end } = getYearToDateRange();
-    const yearData = data.filter((d) => d.date >= start && d.date <= end);
+    const yearData = contributions.filter(
+      (d) => d.date >= start && d.date <= end,
+    );
 
     setTotalContributions(yearData.reduce((sum, d) => sum + d.count, 0));
     setLongestStreak(calculateLongestStreak(yearData));
-
-    return buildYearToDateActivities(data);
+    setCalendarData(buildYearToDateActivities(contributions));
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetchGitHubContributions(USERNAME, YEAR)
+      .then((data) => {
+        if (!cancelled) {
+          applyContributions(data.contributions);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setCalendarData([]);
+          setTotalContributions(0);
+          setLongestStreak(0);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [applyContributions]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="w-full max-w-sm rounded-2xl bg-neutral-800 p-4 md:p-5 text-white shadow-sm border border-neutral-700 cursor-pointer"
+      className="w-full max-w-sm cursor-pointer rounded-2xl border border-neutral-700 bg-neutral-800 p-4 text-white shadow-sm md:p-5"
       onClick={() => window.open(`https://github.com/${USERNAME}`, "_blank")}
     >
       <motion.div className="mb-3 flex items-center justify-between text-xs">
@@ -159,12 +191,11 @@ export default function GitHubActivityCard() {
       </motion.div>
 
       <motion.div ref={containerRef} className="w-full github-calendar-wrap">
-        <GitHubCalendar
-          username={USERNAME}
-          year={YEAR}
+        <ActivityCalendar
+          data={calendarData}
+          loading={loading}
           colorScheme="dark"
           theme={calendarTheme}
-          transformData={transformData}
           weekStart={WEEK_START}
           blockSize={blockSize}
           blockMargin={BLOCK_MARGIN}
@@ -174,6 +205,7 @@ export default function GitHubActivityCard() {
           showMonthLabels={false}
           showColorLegend={false}
           showTotalCount={false}
+          maxLevel={4}
         />
       </motion.div>
 

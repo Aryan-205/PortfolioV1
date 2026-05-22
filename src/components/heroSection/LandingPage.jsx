@@ -1,7 +1,14 @@
+"use client";
+
+import { useEffect } from "react";
 import { motion } from "motion/react";
-import Navbar from "../Navbar";
 import PhotoStack from "./PhotoStack";
 import GitHubActivityCard from "./GithubCard";
+import {
+  GITHUB_USERNAME,
+  GITHUB_YEAR,
+  prefetchGitHubContributions,
+} from "@/lib/githubContributions";
 import {
   Dialog,
   DialogContent,
@@ -37,6 +44,10 @@ const thingsILove = [
 ];
 
 export default function LandingPage() {
+  useEffect(() => {
+    prefetchGitHubContributions(GITHUB_USERNAME, GITHUB_YEAR);
+  }, []);
+
   return (
     <motion.div className="relative flex min-h-[90vh] flex-col md:min-h-screen">
 

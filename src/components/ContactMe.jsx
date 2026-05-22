@@ -1,92 +1,139 @@
+"use client";
+
 import { useState, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
-import { File, Mail } from "lucide-react";
-import { SiGithub } from "react-icons/si";
-import { FaLinkedin } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
+
+import MailIcon from "@/icons/Mail";
+import LinkedInIcon from "@/icons/LinkedIn";
+import ResumeIcon from "@/icons/Resume";
+import GithubIcon from "@/icons/Github";
+import TwitterIcon from "@/icons/Twitter";
+import { PREVIEW_COMPONENTS } from "@/components/contactPreviews";
+import ResumeFullscreenDialog from "@/components/ResumeFullscreenDialog";
+
+const ICON_SIZE = 20;
+
+/** Anchor point on the preview (0–1). Cursor sits on this corner/edge by default. */
+export const PREVIEW_ANCHOR_PRESETS = {
+  "top-left": { x: 0, y: 0 },
+  "top-center": { x: 0.5, y: 0 },
+  "top-right": { x: 1, y: 0 },
+  "center-left": { x: 0, y: 0.5 },
+  center: { x: 0.5, y: 0.5 },
+  "center-right": { x: 1, y: 0.5 },
+  "bottom-left": { x: 0, y: 1 },
+  "bottom-center": { x: 0.5, y: 1 },
+  "bottom-right": { x: 1, y: 1 },
+};
+
+const DEFAULT_PREVIEW_ANCHOR = "bottom-left";
+
+function resolvePreviewAnchor(anchor) {
+  if (!anchor) return PREVIEW_ANCHOR_PRESETS[DEFAULT_PREVIEW_ANCHOR];
+  if (typeof anchor === "string") {
+    return PREVIEW_ANCHOR_PRESETS[anchor] ?? PREVIEW_ANCHOR_PRESETS[DEFAULT_PREVIEW_ANCHOR];
+  }
+  return anchor;
+}
 
 const socialLinks = [
   {
     id: 1,
+    type: "email",
     href: "mailto:aaryann5002@gmail.com",
-    icon: <Mail strokeWidth={1.5} />,
+    Icon: MailIcon,
     label: "EMAIL",
-    preview: {
-      title: "aaryann5002@gmail.com",
-      sub: "Drop me a message anytime",
-      bg: "bg-red-50",
-      accent: "text-red-500",
-    },
   },
   {
     id: 2,
-    href: "https://www.linkedin.com/in/aryan-bola-a95913316/",
-    icon: <FaLinkedin strokeWidth={1.5} />,
-    label: "LINKEDIN",
-    preview: {
-      title: "Aryan Bola",
-      sub: "Connect with me on LinkedIn",
-      bg: "bg-blue-50",
-      accent: "text-blue-600",
-    },
+    type: "twitter",
+    href: "https://x.com/BolatwtX",
+    Icon: TwitterIcon,
+    label: "TWITTER / X",
   },
   {
     id: 3,
-    href: "",
-    icon: <File strokeWidth={1.5} />,
+    type: "resume",
+    href: null,
+    Icon: ResumeIcon,
     label: "RESUME",
-    preview: {
-      title: "My Resume",
-      sub: "View my work & experience",
-      bg: "bg-neutral-100",
-      accent: "text-neutral-700",
-    },
   },
   {
     id: 4,
+    type: "github",
     href: "https://github.com/Aryan-205",
-    icon: <SiGithub />,
+    Icon: GithubIcon,
     label: "GITHUB",
-    preview: {
-      title: "Aryan-205",
-      sub: "Check out my projects",
-      bg: "bg-zinc-900",
-      accent: "text-white",
-      dark: true,
-    },
   },
   {
     id: 5,
-    href: "https://x.com/BolatwtX",
-    icon: <FaTwitter strokeWidth={1.5} />,
-    label: "TWITTER / X",
-    preview: {
-      title: "@BolatwtX",
-      sub: "Follow me on X",
-      bg: "bg-sky-50",
-      accent: "text-sky-500",
-    },
+    type: "linkedin",
+    href: "https://www.linkedin.com/in/aryan-bola-a95913316/",
+    Icon: LinkedInIcon,
+    label: "LINKEDIN",
+    previewAnchor: "bottom-right",
   },
 ];
 
-function SocialItem({ link }) {
+function SocialPreview({
+  type,
+  x,
+  y,
+  visible,
+  anchor = DEFAULT_PREVIEW_ANCHOR,
+  offset = { x: 0, y: 0 },
+}) {
+  const Preview = PREVIEW_COMPONENTS[type];
+  if (!Preview) return null;
+
+  const { x: anchorX, y: anchorY } = resolvePreviewAnchor(anchor);
+
+  return (
+    <motion.div
+      className="pointer-events-none absolute z-50"
+      style={{
+        x,
+        y,
+        top: 0,
+        left: 0,
+        translateX: `calc(${-anchorX * 100}% + ${offset.x}px)`,
+        translateY: `calc(${-anchorY * 100}% + ${offset.y}px)`,
+      }}
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={visible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
+      transition={{ duration: 0.18 }}
+    >
+      <Preview />
+    </motion.div>
+  );
+}
+
+function SocialItem({ link, onResumeOpen }) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef(null);
+  const isResume = link.type === "resume";
 
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
-
   const x = useSpring(rawX, { stiffness: 300, damping: 28 });
   const y = useSpring(rawY, { stiffness: 300, damping: 28 });
 
   const handleMouseMove = (e) => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
-    rawX.set(e.clientX - rect.left + 16);
-    rawY.set(e.clientY - rect.top - 60);
+    rawX.set(e.clientX - rect.left);
+    rawY.set(e.clientY - rect.top);
   };
 
-  const { preview } = link;
+  const triggerClassName =
+    "flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-black px-5 py-3 transition-all duration-300 select-none group cursor-pointer hover:scale-110";
+
+  const motionProps = {
+    className: triggerClassName,
+    transition: { duration: 0.2 },
+    initial: { opacity: 0, y: 10 },
+    whileInView: { opacity: 1, y: 0 },
+  };
 
   return (
     <div
@@ -96,47 +143,60 @@ function SocialItem({ link }) {
       onMouseLeave={() => setHovered(false)}
       onMouseMove={handleMouseMove}
     >
-      <motion.a
-        href={link.href || undefined}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-col items-center justify-center gap-3 px-5 py-3 border border-dashed border-black rounded-xl cursor-pointer select-none group"
-        whileHover={{ backgroundColor: "#000", color: "#fff" }}
-        transition={{ duration: 0.2 }}
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-      >
-        <span className="w-5 h-5">{link.icon}</span>
-      </motion.a>
+      {isResume ? (
+        <motion.button
+          type="button"
+          aria-label="Open resume"
+          onClick={onResumeOpen}
+          {...motionProps}
+        >
+          <link.Icon size={ICON_SIZE} />
+        </motion.button>
+      ) : (
+        <motion.a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          {...motionProps}
+        >
+          <link.Icon size={ICON_SIZE} />
+        </motion.a>
+      )}
 
-      {/* Cursor-following tooltip card */}
-      <motion.div
-        className={`pointer-events-none absolute z-50 w-56 rounded-2xl p-4 shadow-xl ${preview.bg} ${preview.dark ? "border border-white/10" : "border border-black/10"}`}
-        style={{ x, y, top: 0, left: 0 }}
-        initial={{ opacity: 0, scale: 0.92 }}
-        animate={hovered ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
-        transition={{ duration: 0.18 }}
-      >
-        <p className={`text-base font-bold ${preview.accent}`}>{preview.title}</p>
-        <p className={`text-xs mt-1 ${preview.dark ? "text-white/60" : "text-black/50"}`}>{preview.sub}</p>
-      </motion.div>
+      <SocialPreview
+        type={link.type}
+        x={x}
+        y={y}
+        visible={hovered}
+        anchor={link.previewAnchor}
+        offset={link.previewOffset}
+      />
     </div>
   );
 }
 
 export default function ContactMe() {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
   return (
     <section
       id="contact"
-      className="bg-white text-black px-10 py-10 font-sans flex flex-col justify-center gap-10 w-full border-x border-dashed border-neutral-400/80"
+      className="flex w-full flex-col justify-center gap-10 border-x border-dashed border-neutral-400/80 bg-white px-10 py-10 font-sans text-black"
     >
-      <div className="flex justify-between w-full gap-3">
+      <div className="flex w-full justify-around gap-3">
         {socialLinks.map((link) => (
-          <SocialItem key={link.id} link={link} />
+          <SocialItem
+            key={link.id}
+            link={link}
+            onResumeOpen={() => setResumeOpen(true)}
+          />
         ))}
       </div>
+
+      <ResumeFullscreenDialog
+        open={resumeOpen}
+        onOpenChange={setResumeOpen}
+      />
     </section>
   );
 }
-
-
