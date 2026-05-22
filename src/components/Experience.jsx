@@ -4,8 +4,8 @@ const experiences = [
   {
     id: 1,
     company: 'Brutanix Studio',
-    role: 'Full Time',
-    type: 'Lead Frontend Developer',
+    role: 'Lead Frontend Developer',
+    type: 'Internship turned Full Time',
     dateRange: 'Dec 2025 - Present',
     isCurrent: true,
     logo: '',
@@ -17,7 +17,7 @@ const experiences = [
     company: 'Mazuri Freelance Projects',
     role: 'Full Stack Developer',
     type: 'Freelance',
-    dateRange: 'April 2026 - Present',
+    dateRange: 'April 2026',
     isCurrent: true,
     logo: '',
     description:
@@ -28,7 +28,7 @@ const experiences = [
     company: 'Croco Studio',
     role: 'Full Stack Developer',
     type: 'Freelance',
-    dateRange: 'April 2026 - Present',
+    dateRange: 'June 2025 - Present',
     isCurrent: true,
     logo: '',
     description:
@@ -51,13 +51,13 @@ export default function PreChoise() {
   return (
     <section
       id="section"
-      className="w-full relative p-10 overflow-hidden landing-grid-bg"
+      className="w-full relative p-10 overflow-hidden border-x border-dashed border-neutral-400/80 bg-white"
     >
-      <div className="border-x border-dashed border-neutral-300 px-4 md:px-8 bg-white w-full rounded-3xl">
-        <div className="border-t border-dashed border-neutral-300 pt-8 md:pt-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-black tracking-tight">
+      <div className="w-full">
+        <div className="pt-8 md:pt-10">
+          <p className="text-5xl md:text-4xl tracking-tight">
             Work Experience
-          </h2>
+          </p>
 
           <div className="mt-8 md:mt-10 flex flex-col gap-10 md:gap-12">
             {experiences.map((exp) => (
@@ -65,8 +65,6 @@ export default function PreChoise() {
             ))}
           </div>
         </div>
-
-        <div className="border-t border-dashed border-neutral-300 mt-8 md:mt-10" />
       </div>
     </section>
   );

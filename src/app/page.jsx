@@ -1,29 +1,30 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
-import ContactMe from "./components/ContactMe";
-import DesignSection from "./components/DesignSection";
-import DesignSection2 from "./components/DesignSection2";
-import Intro from "./components/Intro";
-import LandingPage from "./components/heroSection/LandingPage";
-import PreChoise from "./components/Experience";
-import ProjectsPage from "./components/ProjectsPage";
-import TechStack from "./components/TechStack";
+import ContactMe from "@/components/ContactMe";
+import Intro from "@/components/Intro";
+import LandingPage from "@/components/heroSection/LandingPage";
+import PreChoise from "@/components/Experience";
+import ProjectsPage from "@/components/ProjectsPage";
+import Others from "@/components/Others";
+import TechStack from "@/components/TechStack";
+import Navbar from "@/components/Navbar";
 
 const INTRO_DISPLAY_MS = 2000;
 
-export default function App() {
+export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
 
   const aboutRef = useRef(null);
   const techStackRef = useRef(null);
   const projectsRef = useRef(null);
-  const contactRef = useRef(null); // Assuming 'Let's Talk' goes to a Contact section
+  const contactRef = useRef(null);
 
-  // 2. Define a function to handle the scrolling
   const scrollToSection = (ref) => {
-    ref.current.scrollIntoView({
+    ref.current?.scrollIntoView({
       behavior: "smooth",
-      block: "start", // Scrolls so the top of the element is at the top of the viewport
+      block: "start",
     });
   };
 
@@ -39,7 +40,6 @@ export default function App() {
     };
   }, [showIntro]);
 
-  // 3. Create props for LandingPage navigation
   const navProps = {
     scrollToAbout: () => scrollToSection(aboutRef),
     scrollToTechStack: () => scrollToSection(techStackRef),
@@ -49,19 +49,23 @@ export default function App() {
 
   return (
     <>
-      <div className="w-full relative">
+      <div className="landing-grid-bg relative w-full overflow-x-hidden px-10">
+        <Navbar
+          scrollToAbout={() => scrollToSection(aboutRef)}
+          scrollToProjects={() => scrollToSection(projectsRef)}
+          scrollToContact={() => scrollToSection(contactRef)}
+        />
         <LandingPage {...navProps} />
         <div ref={techStackRef}>
           <TechStack />
         </div>
         <PreChoise />
-        <div ref={contactRef}>
-          <ContactMe />
-        </div>
-        <DesignSection />
-        <DesignSection2 />
         <div ref={projectsRef}>
           <ProjectsPage />
+        </div>
+        <Others />
+        <div ref={contactRef}>
+          <ContactMe />
         </div>
       </div>
 

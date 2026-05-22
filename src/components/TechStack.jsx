@@ -102,14 +102,14 @@ import {
     { name: "Framer",       Icon: SiFramer },
     { name: "Figma",        Icon: SiFigma },
     { name: "Canva",        Icon: SiCanva },
-    { name: "Funny",        Icon: FaLaugh },
     { name: "Endless Stories",        Icon: FaBook },
     { name: "Learn anything quickly",        Icon: FaBrain },
+    { name: "Funny",        Icon: FaLaugh },
   ];
   
   export default function TechStack() {
     return (
-      <div className="w-full landing-grid-bg p-10 flex flex-col gap-6">
+      <div className="w-full flex flex-col gap-6 border-x border-dashed border-neutral-400/80 bg-white px-10 py-10">
         <p className="text-5xl md:text-4xl tracking-tight">Skills I Got</p>
         <div className="flex flex-wrap gap-3">
           {techs.map(({ name, Icon }) => (

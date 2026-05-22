@@ -128,7 +128,7 @@ export default function ContactMe() {
   return (
     <section
       id="contact"
-      className="bg-transparent text-black px-6 md:px-24 py-12 font-sans flex flex-col justify-center gap-10 w-full"
+      className="bg-white text-black px-10 py-10 font-sans flex flex-col justify-center gap-10 w-full border-x border-dashed border-neutral-400/80"
     >
       <div className="flex justify-between w-full gap-3">
         {socialLinks.map((link) => (

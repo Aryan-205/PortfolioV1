@@ -36,20 +36,11 @@ const thingsILove = [
   },
 ];
 
-export default function LandingPage({
-  scrollToAbout,
-  scrollToProjects,
-  scrollToContact,
-}) {
+export default function LandingPage() {
   return (
-    <motion.div className="landing-grid-bg relative flex min-h-[90vh] flex-col md:min-h-screen">
-      <Navbar
-        scrollToAbout={scrollToAbout}
-        scrollToProjects={scrollToProjects}
-        scrollToContact={scrollToContact}
-      />
+    <motion.div className="relative flex min-h-[90vh] flex-col md:min-h-screen">
 
-      <main className="relative z-10 mx-3 mb-6 flex flex-1 flex-col lg:justify-between gap-10 rounded-3xl border border-dashed border-neutral-400/80 bg-[#f7f7f5]/90 px-4 py-6 sm:mx-4 sm:px-5 sm:py-8 md:mx-10 md:gap-12 md:px-12 md:py-12">
+      <main className="relative z-10 flex flex-1 flex-col lg:justify-between gap-10 rounded-3xl rounded-b-none border-b-0 border border-dashed border-neutral-400/80 bg-white px-4 py-6 sm:px-5 sm:py-8 md:gap-12 md:px-12 md:py-12">
         <div className="flex flex-col items-start gap-3 sm:gap-4">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
