@@ -13,19 +13,19 @@ const proofOfWork = [
     images: [
       {
         src: "/projects/Windows.webp",
-        className: "left-[4%] top-[10%] z-10 w-[44%] -rotate-6",
+        className: "w-[40%]",
       },
       {
         src: "/projects/TrackO.webp",
-        className: "left-[30%] top-[4%] z-20 w-[40%] rotate-5",
+        className: "w-[40%]",
       },
       {
         src: "/projects/pathclipper.webp",
-        className: "right-[6%] top-[16%] z-30 w-[38%] -rotate-4",
+        className: "w-[40%]",
       },
       {
         src: "/projects/monsterEnergy.webp",
-        className: "right-[18%] bottom-[8%] z-40 w-[32%] rotate-6",
+        className: "w-[40%]",
       },
     ],
   },
@@ -40,15 +40,15 @@ const proofOfWork = [
     images: [
       {
         src: "/designs/d10.webp",
-        className: "left-[8%] top-[12%] z-10 w-[40%] -rotate-7",
+        className: "right-[8%] top-[12%] z-10 w-[40%] ",
       },
       {
         src: "/designs/d15.webp",
-        className: "left-[34%] top-[5%] z-20 w-[38%] rotate-3",
+        className: "right-[34%] top-[5%] z-20 w-[38%] ",
       },
       {
         src: "/designs/d21.webp",
-        className: "right-[5%] top-[18%] z-30 w-[36%] -rotate-5",
+        className: "left-[5%] top-[18%] z-30 w-[36%] ",
       },
     ],
   },
@@ -63,15 +63,15 @@ const proofOfWork = [
     images: [
       {
         src: "/thingsILove/book.png",
-        className: "left-[6%] top-[14%] z-10 w-[38%] -rotate-8",
+        className: "left-[6%] top-[14%] z-10 w-[38%]",
       },
       {
         src: "/bg3.jpeg",
-        className: "left-[32%] top-[6%] z-20 w-[42%] rotate-4",
+        className: "left-[32%] top-[6%] z-20 w-[42%]",
       },
       {
         src: "/random/image1.png",
-        className: "right-[4%] top-[20%] z-30 w-[36%] -rotate-3",
+        className: "right-[4%] top-[20%] z-30 w-[36%]",
       },
     ],
   },
@@ -79,13 +79,13 @@ const proofOfWork = [
 
 function ImageCollage({ images }) {
   return (
-    <div className="relative h-[220px] w-full shrink-0 overflow-hidden sm:h-[260px] md:h-full md:min-h-[280px] md:flex-1">
+    <div className="relative h-[220px] w-full shrink-0 sm:h-[260px] md:h-full md:min-h-[280px] md:flex-1 grid grid-cols-2 gap-2">
       {images.map((image, index) => (
         <img
           key={`${image.src}-${index}`}
           src={image.src}
           alt=""
-          className={`absolute rounded-lg border border-neutral-200 bg-white object-cover object-top shadow-md transition-transform duration-300 group-hover:scale-[1.02] ${image.className}`}
+          className={`rounded-lg border border-neutral-200 bg-white object-cover object-top shadow-md duration-150 ease-in-out transition-all`}
         />
       ))}
     </div>
@@ -107,9 +107,7 @@ function ProofOfWorkCard({
   const content = (
     <>
       <div
-        className={`flex max-w-full flex-1 flex-col justify-center gap-3 border-b border-dashed border-neutral-200 px-6 py-8 md:max-w-[42%] md:border-b-0 md:px-10 md:py-10 ${
-          reverse ? "md:border-l" : "md:border-r"
-        }`}
+        className={`flex max-w-full flex-1 flex-col justify-center gap-3 border-b border-dashed border-neutral-200 px-6 py-8 md:max-w-[42%] md:border-b-0 md:px-10 md:py-10 border-x-2`}
       >
         <div className="inline-flex items-center gap-2">
           <h3 className="text-2xl font-bold tracking-tight text-black md:text-3xl">
