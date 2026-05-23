@@ -11,7 +11,7 @@ import TwitterIcon from "@/icons/Twitter";
 import { PREVIEW_COMPONENTS } from "@/components/contactPreviews";
 import ResumeFullscreenDialog from "@/components/ResumeFullscreenDialog";
 
-const ICON_SIZE = 20;
+const ICON_SIZE = 18;
 
 /** Anchor point on the preview (0–1). Cursor sits on this corner/edge by default. */
 export const PREVIEW_ANCHOR_PRESETS = {
@@ -126,7 +126,7 @@ function SocialItem({ link, onResumeOpen }) {
   };
 
   const triggerClassName =
-    "flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-black px-5 py-3 transition-all duration-300 select-none group cursor-pointer hover:scale-110";
+    "flex h-11 w-full items-center justify-center rounded-lg border border-dashed border-black px-2 py-2 transition-all duration-300 select-none group cursor-pointer active:scale-95 md:h-auto md:w-auto md:gap-3 md:rounded-xl md:px-5 md:py-3 md:hover:scale-110";
 
   const motionProps = {
     className: triggerClassName,
@@ -163,14 +163,16 @@ function SocialItem({ link, onResumeOpen }) {
         </motion.a>
       )}
 
-      <SocialPreview
-        type={link.type}
-        x={x}
-        y={y}
-        visible={hovered}
-        anchor={link.previewAnchor}
-        offset={link.previewOffset}
-      />
+      <div className="hidden md:block">
+        <SocialPreview
+          type={link.type}
+          x={x}
+          y={y}
+          visible={hovered}
+          anchor={link.previewAnchor}
+          offset={link.previewOffset}
+        />
+      </div>
     </div>
   );
 }
@@ -181,9 +183,9 @@ export default function ContactMe() {
   return (
     <section
       id="contact"
-      className="flex w-full flex-col justify-center gap-10 border-x border-dashed border-neutral-400/80 bg-white px-10 py-10 font-sans text-black"
+      className="flex w-full flex-col justify-center gap-6 border-x border-dashed border-neutral-400/80 bg-white px-4 py-8 font-sans text-black md:gap-10 md:px-10 md:py-10"
     >
-      <div className="flex w-full justify-around gap-3">
+      <div className="grid w-full grid-cols-5 gap-2 sm:max-w-lg sm:mx-auto md:max-w-none md:flex md:justify-around md:gap-3">
         {socialLinks.map((link) => (
           <SocialItem
             key={link.id}

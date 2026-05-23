@@ -1,62 +1,18 @@
 import { Globe, Play } from "lucide-react";
 import { SiGithub } from "react-icons/si";
+import projectsData from "@/data/projects.json";
 
-const projectData = [
-  {
-    id: 1,
-    title: "Windows",
-    description:
-      "Experience the Windows ecosystem in the browser with a fully interactive desktop UI, draggable windows, and familiar system apps rebuilt for the web.",
-    imageSrc: "/projects/Windows.webp",
-    tags: ["React", "Tailwind CSS", "Motion", "Vite"],
-    links: { website: "https://windows-site-sigma.vercel.app/", github: "https://github.com/Aryan-205/Windows-Site" },
+const projectData = projectsData.projects.map((project) => ({
+  id: project.id,
+  title: project.title,
+  description: project.description,
+  imageSrc: project.image,
+  tags: project.techStack,
+  links: {
+    website: project.liveUrl || undefined,
+    github: project.githubUrl || undefined,
   },
-  {
-    id: 2,
-    title: "FlyHigh",
-    description:
-      "A cinematic travel website built with Three.js featuring immersive 3D scenes, smooth scroll interactions, and a polished landing experience.",
-    imageSrc: "/designs/d21.webp",
-    tags: ["React", "Three.js", "Tailwind CSS", "GSAP"],
-    links: { website: "https://fly-high-dusky.vercel.app/", github: "https://github.com/Aryan-205/Fly-High" },
-  },
-  {
-    id: 3,
-    title: "Snip App",
-    description:
-      "A peer-to-peer rental platform that helps users list, discover, and book items directly from other people in their community.",
-    imageSrc: "/projects/AppleBentoGrid.webp",
-    tags: ["React", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
-    links: { website: "https://bento-virid.vercel.app/", github: "https://github.com/Aryan-205/Snip-App" },
-  },
-  {
-    id: 5,
-    title: "PathClipper",
-    description:
-      "A tool that makes complex SVG path clipping easier with a visual editor, live preview, and export options for designers and developers.",
-    imageSrc: "/projects/pathclipper.webp",
-    tags: ["React", "SVG", "Tailwind CSS", "Canvas API"],
-    links: { website: "https://path-clipper.vercel.app/", github: "https://github.com/Aryan-205/Path-Clipper" },
-  },
-  {
-    id: 6,
-    title: "TrackO",
-    description:
-      "A community live location tracking website for sharing real-time positions, coordinating meetups, and staying connected on the go.",
-    imageSrc: "/projects/TrackO.webp",
-    tags: ["React", "Socket.io", "Node.js", "Maps API", "Tailwind CSS"],
-    links: { website: "https://track-o-beige.vercel.app/", github: "https://github.com/Aryan-205/Track-O" },
-  },
-  {
-    id: 8,
-    title: "Monster Energy",
-    description:
-      "A 3D commercial website with product-focused scenes, bold motion design, and an energetic brand experience built for the web.",
-    imageSrc: "/projects/monsterEnergy.webp",
-    tags: ["React", "Three.js", "GSAP", "Tailwind CSS"],
-    links: { website: "https://monster-energy-3d.vercel.app/", github: "https://github.com/Aryan-205/Monster-Energy-3D" },
-  },
-];
+}));
 
 const MAX_VISIBLE_TAGS = 4;
 

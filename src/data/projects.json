@@ -1,0 +1,84 @@
+{
+  "projects": [
+    {
+      "id": "windows-os-clone",
+      "title": "Windows OS Clone",
+      "description": "A full-stack application with scalable backend and modern UI/UX.",
+      "image": "/projects/Windows.webp",
+      "techStack": ["Next.js", "TypeScript", "Tailwind"],
+      "status": "Live",
+      "liveUrl": "https://windows-os-clone.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Windows-OS-Clone"
+    },
+    {
+      "id": "flyhigh",
+      "title": "FlyHigh",
+      "description": "Production-ready architecture with real-time features and auth.",
+      "image": "/designs/d21.webp",
+      "techStack": ["React", "Node.js", "PostgreSQL"],
+      "status": "Live",
+      "liveUrl": "https://fly-high-dusky.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Fly-High"
+    },
+    {
+      "id": "snip-app",
+      "title": "Snip App",
+      "description": "Mobile-first design with offline support and push notifications.",
+      "image": "/projects/AppleBentoGrid.webp",
+      "techStack": ["React", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
+      "status": "WIP",
+      "liveUrl": "https://bento-virid.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Snip-App"
+    },
+    {
+      "id": "pathclipper",
+      "title": "PathClipper",
+      "description": "A tool that makes complex SVG path clipping easier with a visual editor, live preview, and export options for designers and developers.",
+      "image": "/projects/pathclipper.webp",
+      "techStack": ["React", "SVG", "Tailwind CSS", "Canvas API"],
+      "status": "Live",
+      "liveUrl": "https://path-clipper.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Path-Clipper"
+    },
+    {
+      "id": "rento",
+      "title": "Rento",
+      "description": "A luxury car rental platform with a modern UI/UX and booking system.",
+      "image": "/projects/Rento.webp",
+      "techStack": ["React", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
+      "status": "Live",
+      "liveUrl": "https://rento-beta.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Rento"
+    },
+    {
+      "id": "xcard",
+      "title": "XCard",
+      "description": "A tool that helps you simply create X card for yourself.",
+      "image": "/projects/Xcard.webp",
+      "techStack": ["React", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
+      "status": "WIP",
+      "liveUrl": "",
+      "githubUrl": "https://github.com/Aryan-205/XCard"
+    },
+    {
+      "id": "tracko",
+      "title": "TrackO",
+      "description": "A community live location tracking website for sharing real-time positions, coordinating meetups, and staying connected on the go.",
+      "image": "/projects/TrackO.webp",
+      "techStack": ["React", "Socket.io", "Node.js", "Maps API", "Tailwind CSS"],
+      "status": "Live",
+      "liveUrl": "https://track-o-beige.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Track-O"
+    },
+    {
+      "id": "monster-energy",
+      "title": "Monster Energy",
+      "description": "A 3D commercial website with product-focused scenes, bold motion design, and an energetic brand experience built for the web.",
+      "image": "/projects/monsterEnergy.webp",
+      "techStack": ["React", "Three.js", "GSAP", "Tailwind CSS"],
+      "status": "Live",
+      "liveUrl": "https://monster-energy-3d.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Monster-Energy-3D"
+    }
+  ]
+}

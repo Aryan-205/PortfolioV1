@@ -51,7 +51,7 @@ export default function LandingPage() {
   return (
     <motion.div className="relative flex min-h-[90vh] flex-col md:min-h-screen">
 
-      <main className="relative z-10 flex flex-1 flex-col lg:justify-between gap-10 rounded-3xl rounded-b-none border-b-0 border border-dashed border-neutral-400/80 bg-white px-4 py-6 sm:px-5 sm:py-8 md:gap-12 md:px-12 md:py-12">
+      <main className="relative z-10 flex flex-1 flex-col lg:justify-between gap-8 rounded-none border-b-0 border border-dashed border-neutral-400/80 bg-white px-4 py-6 sm:gap-10 sm:rounded-3xl sm:px-5 sm:py-8 md:gap-12 md:px-12 md:py-12">
         <div className="flex flex-col items-start gap-3 sm:gap-4">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -129,7 +129,7 @@ export default function LandingPage() {
                 <FlipButton
                   key={index}
                   text={role}
-                  className="text-base sm:text-lg md:text-xl"
+                  className="text-sm sm:text-lg md:text-xl"
                   uppercase={false}
                 />
               ))}

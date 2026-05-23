@@ -147,7 +147,7 @@ function ProofOfWorkCard({
 
 export default function ProofOfWork() {
   return (
-    <section className="w-full overflow-hidden border-x border-dashed border-neutral-400/80 bg-white px-6 py-10 md:px-10 md:py-14">
+    <section className="w-full overflow-hidden border-x border-dashed border-neutral-400/80 bg-white px-4 py-8 md:px-10 md:py-14">
       <div className="mb-10 border-b border-dashed border-neutral-300 pb-6">
         <p className="text-5xl tracking-tight text-black">Proof of Work</p>
         <p className="mt-2 max-w-2xl text-sm text-neutral-500 md:text-base">

@@ -4,13 +4,13 @@ function CompanyLogo({ src, company }) {
       <img
         src={src}
         alt={`${company} logo`}
-        className="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl bg-black object-cover"
+        className="h-10 w-10 shrink-0 rounded-lg bg-black object-cover md:h-14 md:w-14 md:rounded-xl"
       />
     );
   }
 
   return (
-    <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl bg-gray-200 text-black border flex items-center justify-center text-lg font-semibold">
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border bg-gray-200 text-base font-semibold text-black md:h-14 md:w-14 md:rounded-xl md:text-lg">
       {company.charAt(0)}
     </div>
   );
@@ -26,30 +26,35 @@ export default function ExperienceCard({
   isCurrent = false,
 }) {
   return (
-    <article className="flex gap-4 md:gap-5">
+    <article className="flex gap-3 md:gap-5">
       <CompanyLogo src={logo} company={company} />
 
-      <div className="flex-1 min-w-0">
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="font-semibold text-black text-base md:text-lg">{company}</span>
-            <span className="text-neutral-300 select-none" aria-hidden>|</span>
-            <span className="text-neutral-500 text-base md:text-lg">{role}</span>
-            <span className="text-neutral-300 select-none" aria-hidden>|</span>
-            <span className="text-neutral-500 text-base md:text-lg">{type}</span>
-            {isCurrent && (
-              <span
-                className="w-2 h-2 rounded-full bg-lime-500 shrink-0"
-                aria-label="Currently working"
-              />
-            )}
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-2">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-black md:text-lg">{company}</p>
+            <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-neutral-500 md:text-base">
+              <span>{role}</span>
+              <span className="hidden text-neutral-300 sm:inline" aria-hidden>
+                |
+              </span>
+              <span className="flex items-center gap-1.5">
+                {type}
+                {isCurrent ? (
+                  <span
+                    className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime-500"
+                    aria-label="Currently working"
+                  />
+                ) : null}
+              </span>
+            </div>
           </div>
-          { isCurrent && (<p className="text-neutral-500 text-sm md:text-base sm:text-right shrink-0">
-            {dateRange}
-          </p>)}
+          {dateRange ? (
+            <p className="shrink-0 text-xs text-neutral-500 md:text-sm">{dateRange}</p>
+          ) : null}
         </div>
 
-        <p className="mt-2 md:mt-3 text-neutral-500 text-sm md:text-[15px] leading-relaxed">
+        <p className="mt-2 text-xs leading-relaxed text-neutral-500 md:mt-3 md:text-[15px]">
           {description}
         </p>
       </div>
