@@ -1,21 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeftIcon, ArrowUpRight, MoreHorizontal } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import blogsData from "@/data/blogs.json";
 
 function BlogCard({ blog }) {
   const content = (
-  <>
-      <div className="flex items-center justify-between gap-4 cursor-pointer">
-        <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-emerald-300 bg-emerald-50 px-2.5 py-0.5 text-[11px] font-medium text-emerald-700">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            {blog.status}
-          </span>
-          <span className="text-sm text-black/45">{blog.date}</span>
-        </div>
-        <MoreHorizontal className="h-4 w-4 shrink-0 text-black/25" aria-hidden />
+    <>
+      <div className="flex items-center gap-3">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-emerald-300 bg-emerald-50 px-2.5 py-0.5 text-[11px] font-medium text-emerald-700">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          {blog.status}
+        </span>
+        <span className="text-sm text-black/45">{blog.date}</span>
       </div>
 
       <h2 className="mt-4 text-xl font-semibold leading-snug tracking-tight text-black md:text-2xl">
@@ -26,11 +23,17 @@ function BlogCard({ blog }) {
         {blog.description}
       </p>
 
-      {blog.url ? (
-        <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-black/60 transition-colors group-hover:text-black">
-          Read on Medium
-          <ArrowUpRight className="h-3.5 w-3.5" />
-        </span>
+      {blog.tags?.length > 0 ? (
+        <div className="mt-4 flex flex-wrap gap-2 border-t border-dashed border-neutral-200 pt-4">
+          {blog.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-sm border border-dashed border-neutral-300 bg-neutral-50 px-2.5 py-0.5 text-xs font-medium text-black/70"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       ) : null}
     </>
   );

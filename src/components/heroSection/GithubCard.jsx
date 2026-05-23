@@ -112,10 +112,12 @@ function calculateLongestStreak(activities) {
   return longest;
 }
 
-function useContainerWidth(ref) {
+function useContainerWidth(ref, enabled) {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
+    if (!enabled) return;
+
     const el = ref.current;
     if (!el) return;
 
@@ -125,14 +127,24 @@ function useContainerWidth(ref) {
     const observer = new ResizeObserver(update);
     observer.observe(el);
     return () => observer.disconnect();
-  }, [ref]);
+  }, [ref, enabled]);
 
   return width;
 }
 
+function CalendarSkeleton() {
+  return (
+    <div
+      className="h-[98px] w-full animate-pulse rounded-md bg-neutral-700/80"
+      aria-hidden
+    />
+  );
+}
+
 export default function GitHubActivityCard() {
+  const [hasMounted, setHasMounted] = useState(false);
   const containerRef = useRef(null);
-  const containerWidth = useContainerWidth(containerRef);
+  const containerWidth = useContainerWidth(containerRef, hasMounted);
   const weekCount = getYearToDateWeekCount();
   const blockSize = getBlockSize(containerWidth, weekCount);
 
@@ -140,6 +152,10 @@ export default function GitHubActivityCard() {
   const [loading, setLoading] = useState(true);
   const [totalContributions, setTotalContributions] = useState(null);
   const [longestStreak, setLongestStreak] = useState(null);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const applyContributions = useCallback((contributions) => {
     const { start, end } = getYearToDateRange();
@@ -153,6 +169,8 @@ export default function GitHubActivityCard() {
   }, []);
 
   useEffect(() => {
+    if (!hasMounted) return;
+
     let cancelled = false;
 
     fetchGitHubContributions(USERNAME, YEAR)
@@ -175,45 +193,48 @@ export default function GitHubActivityCard() {
     return () => {
       cancelled = true;
     };
-  }, [applyContributions]);
+  }, [applyContributions, hasMounted]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
       className="w-full max-w-sm cursor-pointer rounded-2xl border border-neutral-700 bg-neutral-800 p-4 text-white shadow-sm md:p-5"
       onClick={() => window.open(`https://github.com/${USERNAME}`, "_blank")}
     >
-      <motion.div className="mb-3 flex items-center justify-between text-xs">
+      <div className="mb-3 flex items-center justify-between text-xs">
         <span className="font-medium tracking-wide">GitHub Activity</span>
         <span className="text-neutral-400">@{USERNAME}</span>
-      </motion.div>
+      </div>
 
-      <motion.div ref={containerRef} className="w-full github-calendar-wrap">
-        <ActivityCalendar
-          data={calendarData}
-          loading={loading}
-          colorScheme="dark"
-          theme={calendarTheme}
-          weekStart={WEEK_START}
-          blockSize={blockSize}
-          blockMargin={BLOCK_MARGIN}
-          blockRadius={2}
-          fontSize={12}
-          showWeekdayLabels={false}
-          showMonthLabels={false}
-          showColorLegend={false}
-          showTotalCount={false}
-          maxLevel={4}
-        />
-      </motion.div>
+      <div ref={containerRef} className="github-calendar-wrap w-full min-h-[98px]">
+        {hasMounted ? (
+          <ActivityCalendar
+            data={calendarData}
+            loading={loading}
+            colorScheme="dark"
+            theme={calendarTheme}
+            weekStart={WEEK_START}
+            blockSize={blockSize}
+            blockMargin={BLOCK_MARGIN}
+            blockRadius={2}
+            fontSize={12}
+            showWeekdayLabels={false}
+            showMonthLabels={false}
+            showColorLegend={false}
+            showTotalCount={false}
+            maxLevel={4}
+          />
+        ) : (
+          <CalendarSkeleton />
+        )}
+      </div>
 
-      <motion.div className="mt-4 flex gap-6 text-xs text-neutral-400">
+      <div className="mt-4 flex gap-6 text-xs text-neutral-400">
         <p>
           <span className="block font-semibold text-white">This Year</span>
           {totalContributions != null ? (
-            totalContributions.toLocaleString()
+            totalContributions.toLocaleString("en-US")
           ) : (
             <span className="inline-block h-4 w-10 animate-pulse rounded bg-neutral-700" />
           )}
@@ -226,7 +247,7 @@ export default function GitHubActivityCard() {
             <span className="inline-block h-4 w-12 animate-pulse rounded bg-neutral-700" />
           )}
         </p>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
