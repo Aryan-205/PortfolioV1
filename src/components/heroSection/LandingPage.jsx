@@ -51,8 +51,8 @@ export default function LandingPage() {
   return (
     <motion.div className="relative flex min-h-[90vh] flex-col md:min-h-screen">
 
-      <main className="relative z-10 flex flex-1 flex-col lg:justify-between gap-8 rounded-b-none border-b-0 border border-dashed border-neutral-400/80 bg-white px-4 py-6 sm:gap-10 sm:rounded-3xl sm:px-5 sm:py-8 md:gap-12 md:px-12 md:py-12">
-        <div className="flex flex-col items-start gap-3 sm:gap-4">
+      <main className="relative z-10 flex flex-1 flex-col lg:justify-between gap-8 rounded-b-none border-b-0 border border-dashed border-neutral-400/80 bg-white px-4 py-6 sm:gap-10 sm:rounded-t-3xl sm:rounded-b-none sm:px-5 sm:py-8 md:gap-12 md:px-12 md:py-12">
+        <div className="flex flex-col items-start gap-3 sm:gap-4 ">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,15 +65,15 @@ export default function LandingPage() {
           <p className="max-w-xl text-sm leading-relaxed text-neutral-600 sm:text-base">
             Helping startups go from 0 to 1
             <br />
-            Building{" "}
-            <span className="rounded-full border border-dashed border-neutral-400 bg-white px-2 py-0.5 text-neutral-800">
-              Web
+            I think deeply about{" "}
+            <span className="rounded-full border border-dashed border-neutral-400 bg-white px-2 py-0.5 text-neutral-800 bg-linear-to-tr from-blue-200 to-white">
+              UX
             </span>{" "}
-            and{" "}
-            <span className="rounded-full border border-dashed border-neutral-400 bg-white px-2 py-0.5 text-neutral-800">
-              App
+            and ship{" "}
+            <span className="rounded-full border border-dashed border-neutral-400 bg-white px-2 py-0.5 text-neutral-800 bg-linear-to-tr from-green-200 to-white">
+              Backend
             </span>{" "}
-            products with clean UI and solid backend architecture.
+            systems that hold up — building products end to end that feel right and work reliably.
           </p>
         </div>
 
@@ -137,7 +137,7 @@ export default function LandingPage() {
           </div>
 
           {/* GitHub card */}
-          <div className="order-3 flex w-full justify-center lg:order-3 lg:w-auto lg:justify-end">
+          <div className="order-3 flex w-full justify-center lg:order-3 lg:w-full lg:max-w-sm lg:shrink-0 lg:justify-end">
             <GitHubActivityCard />
           </div>
         </div>

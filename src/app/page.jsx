@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="landing-grid-bg relative w-full overflow-x-hidden px-0 md:px-10">
+      <div className="landing-grid-bg relative w-full overflow-x-hidden px-0 md:px-10 pb-20">
         <Navbar />
         <LandingPage />
         <TechStack />

@@ -1,6 +1,36 @@
 {
   "projects": [
     {
+      "id": "tracko",
+      "title": "TrackO",
+      "description": "A community live location tracking website for sharing real-time positions, coordinating meetups, and staying connected on the go.",
+      "image": "/projects/TrackO.webp",
+      "techStack": ["React", "Socket.io", "Node.js", "Maps API", "Tailwind CSS"],
+      "status": "Live",
+      "liveUrl": "https://track-o-beige.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Track-O"
+    },
+    {
+      "id": "monster-energy",
+      "title": "Monster Energy",
+      "description": "A 3D commercial website with product-focused scenes, bold motion design, and an energetic brand experience built for the web.",
+      "image": "/projects/monsterEnergy.webp",
+      "techStack": ["React", "Three.js", "GSAP", "Tailwind CSS"],
+      "status": "Live",
+      "liveUrl": "https://monster-energy-3d.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Monster-Energy-3D"
+    },
+    {
+      "id": "bolabits",
+      "title": "BolaBits",
+      "description": "An Component liberary with animated Icons and microinteraction",
+      "image": "/projects/ComponentLib.webp",
+      "techStack": ["React", "Tailwind CSS", "Motion"],
+      "status": "Live",
+      "liveUrl": "https://component-library2-0.vercel.app/",
+      "githubUrl": "https://github.com/Aryan-205/Component-Library-2.0"
+    },
+    {
       "id": "windows-os-clone",
       "title": "Windows OS Clone",
       "description": "A full-stack application with scalable backend and modern UI/UX.",
@@ -24,10 +54,10 @@
       "id": "snip-app",
       "title": "Snip App",
       "description": "Mobile-first design with offline support and push notifications.",
-      "image": "/projects/AppleBentoGrid.webp",
+      "image": "/projects/snip.webp",
       "techStack": ["React", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
       "status": "WIP",
-      "liveUrl": "https://bento-virid.vercel.app/",
+      "liveUrl": "",
       "githubUrl": "https://github.com/Aryan-205/Snip-App"
     },
     {
@@ -56,29 +86,9 @@
       "description": "A tool that helps you simply create X card for yourself.",
       "image": "/projects/Xcard.webp",
       "techStack": ["React", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"],
-      "status": "WIP",
+      "status": "",
       "liveUrl": "",
       "githubUrl": "https://github.com/Aryan-205/XCard"
-    },
-    {
-      "id": "tracko",
-      "title": "TrackO",
-      "description": "A community live location tracking website for sharing real-time positions, coordinating meetups, and staying connected on the go.",
-      "image": "/projects/TrackO.webp",
-      "techStack": ["React", "Socket.io", "Node.js", "Maps API", "Tailwind CSS"],
-      "status": "Live",
-      "liveUrl": "https://track-o-beige.vercel.app/",
-      "githubUrl": "https://github.com/Aryan-205/Track-O"
-    },
-    {
-      "id": "monster-energy",
-      "title": "Monster Energy",
-      "description": "A 3D commercial website with product-focused scenes, bold motion design, and an energetic brand experience built for the web.",
-      "image": "/projects/monsterEnergy.webp",
-      "techStack": ["React", "Three.js", "GSAP", "Tailwind CSS"],
-      "status": "Live",
-      "liveUrl": "https://monster-energy-3d.vercel.app/",
-      "githubUrl": "https://github.com/Aryan-205/Monster-Energy-3D"
     }
   ]
 }

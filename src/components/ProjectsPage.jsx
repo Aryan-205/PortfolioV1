@@ -26,12 +26,12 @@ function ProjectCard({ title, description, imageSrc, tags, links }) {
   ].filter(Boolean);
 
   return (
-    <article className="flex h-full flex-col rounded-xl border border-dashed border-neutral-300 bg-white p-3 cursor-crosshair">
-      <div className="rounded-lg">
+    <article className="flex h-full flex-col rounded-xl border border-dashed border-neutral-300 bg-white p-3">
+      <div className="aspect-[3/4] h-40 w-full shrink-0 overflow-hidden rounded-md border border-neutral-200 bg-neutral-50 shadow-sm">
         <img
           src={imageSrc}
           alt={title}
-          className="aspect-video w-full rounded-md border border-neutral-200 bg-white object-cover object-top shadow-sm"
+          className="h-full w-full object-contain"
         />
       </div>
 

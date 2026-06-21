@@ -16,6 +16,7 @@ import {
   SiJavascript,
   SiZod,
   SiExpo,
+  SiRedis,
 } from "react-icons/si";
 import { TbBrandFramerMotion } from "react-icons/tb";
 import {
@@ -28,6 +29,7 @@ import {
   FaBook,
   FaBrain,
 } from "react-icons/fa";
+import { DiRedis } from "react-icons/di";
 
 const techs = [
   { name: "React", Icon: FaReact },
@@ -47,6 +49,7 @@ const techs = [
   { name: "Auth0", Icon: SiAuth0 },
   { name: "JWT", Icon: FaLock },
   { name: "WebSocket", Icon: FaLink },
+  { name: "Redis", Icon: DiRedis },
   { name: "PostgreSQL", Icon: SiPostgresql },
   { name: "MongoDB", Icon: SiMongodb },
   { name: "Prisma", Icon: SiPrisma },
@@ -68,7 +71,7 @@ export default function TechStack() {
         {techs.map(({ name, Icon }) => (
           <div
             key={name}
-            className="flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-50 px-2.5 py-1.5 text-xs font-medium shadow-[0_0_10px_0_rgba(0,0,0,0.1)] transition duration-200 hover:border-black hover:bg-black hover:text-white md:gap-2 md:rounded-xl md:px-3.5 md:py-2 md:text-sm"
+            className="flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-50 px-2.5 py-1.5 text-xs font-medium shadow-[0_0_10px_0_rgba(0,0,0,0.1)] transition duration-200 hover:border-black hover:bg-black hover:text-white md:gap-2 md:rounded-xl md:px-3.5 md:py-2 md:text-sm cursor-pointer"
           >
             <Icon className="h-3 w-3 shrink-0 md:h-4 md:w-4" />
             <span>{name}</span>

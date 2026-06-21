@@ -62,12 +62,15 @@ function getYearToDateWeekCount() {
   return Math.ceil(dayCount / 7);
 }
 
+const CARD_MIN_WIDTH = 320;
+
 function getBlockSize(containerWidth, weekCount) {
-  if (containerWidth < 40 || weekCount < 1) return 10;
+  const width = containerWidth < CARD_MIN_WIDTH ? CARD_MIN_WIDTH : containerWidth;
+  if (width < 40 || weekCount < 1) return 10;
   return Math.max(
     4,
     Math.floor(
-      (containerWidth - (weekCount - 1) * BLOCK_MARGIN) / weekCount,
+      (width - (weekCount - 1) * BLOCK_MARGIN) / weekCount,
     ),
   );
 }
@@ -147,6 +150,7 @@ export default function GitHubActivityCard() {
   const containerWidth = useContainerWidth(containerRef, hasMounted);
   const weekCount = getYearToDateWeekCount();
   const blockSize = getBlockSize(containerWidth, weekCount);
+  const calendarReady = hasMounted && containerWidth >= 40;
 
   const [calendarData, setCalendarData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -199,7 +203,7 @@ export default function GitHubActivityCard() {
     <motion.div
       initial={false}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-sm cursor-pointer rounded-2xl border border-neutral-700 bg-neutral-800 p-4 text-white shadow-sm md:p-5"
+      className="w-full min-w-80 max-w-sm cursor-pointer rounded-2xl border border-neutral-700 bg-neutral-800 p-4 text-white shadow-sm md:p-5"
       onClick={() => window.open(`https://github.com/${USERNAME}`, "_blank")}
     >
       <div className="mb-3 flex items-center justify-between text-xs">
@@ -208,7 +212,7 @@ export default function GitHubActivityCard() {
       </div>
 
       <div ref={containerRef} className="github-calendar-wrap w-full min-h-[98px]">
-        {hasMounted ? (
+        {calendarReady ? (
           <ActivityCalendar
             data={calendarData}
             loading={loading}

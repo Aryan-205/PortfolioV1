@@ -42,35 +42,35 @@ const socialLinks = [
     type: "email",
     href: "mailto:aaryann5002@gmail.com",
     Icon: MailIcon,
-    label: "EMAIL",
+    label: "Email",
   },
   {
     id: 2,
     type: "twitter",
     href: "https://x.com/BolatwtX",
     Icon: TwitterIcon,
-    label: "TWITTER / X",
+    label: "X",
   },
   {
     id: 3,
     type: "resume",
     href: null,
     Icon: ResumeIcon,
-    label: "RESUME",
+    label: "Resume",
   },
   {
     id: 4,
     type: "github",
     href: "https://github.com/Aryan-205",
     Icon: GithubIcon,
-    label: "GITHUB",
+    label: "GitHub",
   },
   {
     id: 5,
     type: "linkedin",
     href: "https://www.linkedin.com/in/aryan-bola-a95913316/",
     Icon: LinkedInIcon,
-    label: "LINKEDIN",
+    label: "LinkedIn",
     previewAnchor: "bottom-right",
   },
 ];
@@ -173,6 +173,11 @@ function SocialItem({ link, onResumeOpen }) {
           offset={link.previewOffset}
         />
       </div>
+      <div className="absolute -bottom-6 w-full text-center">
+        <p className="text-sm text-neutral-500 text-center">
+          {link.label}
+        </p>
+      </div>
     </div>
   );
 }
@@ -183,7 +188,7 @@ export default function ContactMe() {
   return (
     <section
       id="contact"
-      className="flex w-full flex-col justify-center gap-6 border-x border-dashed border-neutral-400/80 bg-white px-4 py-8 font-sans text-black md:gap-10 md:px-10 md:py-10"
+      className="flex w-full flex-col justify-center gap-6 border-x border-dashed border-neutral-400/80 bg-white px-4 py-8 font-sans text-black md:gap-10 md:px-10 md:py-10 rounded-b-3xl"
     >
       <div className="grid w-full grid-cols-5 gap-2 sm:max-w-lg sm:mx-auto md:max-w-none md:flex md:justify-around md:gap-3">
         {socialLinks.map((link) => (

@@ -19,7 +19,7 @@ const statusIcons = {
 
 function ProjectCard({ project }) {
   return (
-    <div className="group bg-white rounded-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-dashed border-neutral-300 p-2">
+    <div className="group bg-white rounded-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-dashed border-neutral-300 p-2 cursor-pointer">
       <div className="relative w-full h-44 overflow-hidden bg-black/5 rounded-md">
         <img
           src={project.image}
