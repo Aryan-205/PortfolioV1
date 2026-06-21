@@ -1,0 +1,22 @@
+{
+  "blogs": [
+    {
+      "id": "react-rerenders-under-the-hood",
+      "title": "How React actually re-renders under the hood ?",
+      "description": "The React Diffing Algorithm (often referred to as the React Reconciliation Algorithm) is a ...",
+      "date": "Apr 28",
+      "status": "Published",
+      "url": "https://x.com/BolatwtX/status/2049164512558039080",
+      "tags": ["React", "Reconciliation", "Frontend", "Performance"]
+    },
+    {
+      "id": "develop-design-taste",
+      "title": "Develop you design taste in 5 easy steps",
+      "description": "Developing a \"good eye\" for design isn't a mysterious gift bestowed upon a lucky few; ...",
+      "date": "Apr 11",
+      "status": "Published",
+      "url": "https://x.com/BolatwtX/status/2042964818064478565",
+      "tags": ["Design", "UI/UX", "Creativity", "Product"]
+    }
+  ]
+}

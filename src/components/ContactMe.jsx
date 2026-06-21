@@ -1,145 +1,209 @@
-import { motion } from "motion/react";
+"use client";
 
-export default function ContactMe(){
+import { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 
-  const EMAIL_HREF = 'mailto:aaryann5002@gmail.com'; 
+import MailIcon from "@/icons/Mail";
+import LinkedInIcon from "@/icons/LinkedIn";
+import ResumeIcon from "@/icons/Resume";
+import GithubIcon from "@/icons/Github";
+import TwitterIcon from "@/icons/Twitter";
+import { PREVIEW_COMPONENTS } from "@/components/contactPreviews";
+import ResumeFullscreenDialog from "@/components/ResumeFullscreenDialog";
+
+const ICON_SIZE = 18;
+
+/** Anchor point on the preview (0–1). Cursor sits on this corner/edge by default. */
+export const PREVIEW_ANCHOR_PRESETS = {
+  "top-left": { x: 0, y: 0 },
+  "top-center": { x: 0.5, y: 0 },
+  "top-right": { x: 1, y: 0 },
+  "center-left": { x: 0, y: 0.5 },
+  center: { x: 0.5, y: 0.5 },
+  "center-right": { x: 1, y: 0.5 },
+  "bottom-left": { x: 0, y: 1 },
+  "bottom-center": { x: 0.5, y: 1 },
+  "bottom-right": { x: 1, y: 1 },
+};
+
+const DEFAULT_PREVIEW_ANCHOR = "bottom-left";
+
+function resolvePreviewAnchor(anchor) {
+  if (!anchor) return PREVIEW_ANCHOR_PRESETS[DEFAULT_PREVIEW_ANCHOR];
+  if (typeof anchor === "string") {
+    return PREVIEW_ANCHOR_PRESETS[anchor] ?? PREVIEW_ANCHOR_PRESETS[DEFAULT_PREVIEW_ANCHOR];
+  }
+  return anchor;
+}
+
+const socialLinks = [
+  {
+    id: 1,
+    type: "email",
+    href: "mailto:aaryann5002@gmail.com",
+    Icon: MailIcon,
+    label: "Email",
+  },
+  {
+    id: 2,
+    type: "twitter",
+    href: "https://x.com/BolatwtX",
+    Icon: TwitterIcon,
+    label: "X",
+  },
+  {
+    id: 3,
+    type: "resume",
+    href: null,
+    Icon: ResumeIcon,
+    label: "Resume",
+  },
+  {
+    id: 4,
+    type: "github",
+    href: "https://github.com/Aryan-205",
+    Icon: GithubIcon,
+    label: "GitHub",
+  },
+  {
+    id: 5,
+    type: "linkedin",
+    href: "https://www.linkedin.com/in/aryan-bola-a95913316/",
+    Icon: LinkedInIcon,
+    label: "LinkedIn",
+    previewAnchor: "bottom-right",
+  },
+];
+
+function SocialPreview({
+  type,
+  x,
+  y,
+  visible,
+  anchor = DEFAULT_PREVIEW_ANCHOR,
+  offset = { x: 0, y: 0 },
+}) {
+  const Preview = PREVIEW_COMPONENTS[type];
+  if (!Preview) return null;
+
+  const { x: anchorX, y: anchorY } = resolvePreviewAnchor(anchor);
 
   return (
-    // Reduced padding and main container to flex-col on small screens
-    <section id='section' className="h-full md:h-screen bg-white text-black px-6 md:px-24 py-8 font-sans flex flex-col md:flex-row  overflow-hidden">
-      
-      {/* Contact Links Column - Adjusted height and alignment */}
-      <div className="h-full flex flex-col justify-start md:justify-between w-full md:w-auto">
-        {/* Reduced heading size */}
-        <p className="text-xl md:text-4xl font-bold text-white w-fit px-2 py-1 md:px-4 md:py-2 tracking-tighter bg-black mb-8 md:mb-0">Contact Me</p>
-        
-        {/* List of Contact Links - Reduced gap and text size */}
-        <div className="flex flex-col justify-start md:justify-center gap-4 md:gap-8 items-start h-full w-full">
-            <motion.a
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              id="p0"
-              href="mailto:aaryann5002@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                borderBottom: '4px solid black',
-                lineHeight: 1.1,
-              }}
-            >
-              {/* Reduced text size */}
-              <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase text-black hover:text-white hover:bg-black transition duration-300">
-                EMAIL
-              </p>
-            </motion.a>
+    <motion.div
+      className="pointer-events-none absolute z-50"
+      style={{
+        x,
+        y,
+        top: 0,
+        left: 0,
+        translateX: `calc(${-anchorX * 100}% + ${offset.x}px)`,
+        translateY: `calc(${-anchorY * 100}% + ${offset.y}px)`,
+      }}
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={visible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
+      transition={{ duration: 0.18 }}
+    >
+      <Preview />
+    </motion.div>
+  );
+}
 
-            <motion.a
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              id="p1"
-              href="https://www.linkedin.com/in/aryan-bola-a95913316/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                borderBottom: '4px solid black',
-                lineHeight: 1.1,
-              }}
-            >
-              {/* Reduced text size */}
-              <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase text-black hover:text-white hover:bg-black transition duration-300">
-                LINKEDIN
-              </p>
-            </motion.a>
+function SocialItem({ link, onResumeOpen }) {
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
+  const isResume = link.type === "resume";
 
-            <motion.a
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              id="p2"
-              href="https://github.com/Aryan-205"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                borderBottom: '4px solid black',
-                lineHeight: 1.1,
-              }}
-            >
-              {/* Reduced text size */}
-              <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase text-black hover:text-white hover:bg-black transition duration-300">
-                GITHUB
-              </p>
-            </motion.a>
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const x = useSpring(rawX, { stiffness: 300, damping: 28 });
+  const y = useSpring(rawY, { stiffness: 300, damping: 28 });
 
-            <motion.a
-              initial={{scale:1.5,opacity:0}}
-              whileInView={{scale:1, opacity:1}}
-              transition={{duration:1, ease:"easeInOut"}}
-              id="p3"
-              href="https://x.com/BolatwtX"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                borderBottom: '4px solid black',
-                lineHeight: 1.1,
-              }}
-              className="relative"
-            >
-              {/* Reduced text size */}
-              <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase text-black hover:text-white hover:bg-black transition duration-300">
-                TWITTER
-              </p>
-              {/* Reduced text and padding */}
-              <p className="absolute bg-black text-green-500 px-2 -bottom-7 md:-bottom-8 right-0 p-1 text-xs md:text-base">Most Active</p>
-            </motion.a>
-        </div>
+  const handleMouseMove = (e) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    rawX.set(e.clientX - rect.left);
+    rawY.set(e.clientY - rect.top);
+  };
 
-        {/* Send Mail Button - Reduced padding and font size */}
-        <div className="pt-8 md:pt-0">
-          <a
-            href="/resume.pdf"
-            className="inline-block px-6 py-3 md:px-8 md:py-4 border-4 border-black bg-black text-white text-base md:text-xl font-extrabold uppercase tracking-wider  hover:bg-gray-800 transition duration-300"
-            download
-          >
-            Download Resume
-          </a>
-        </div>
+  const triggerClassName =
+    "flex h-11 w-full items-center justify-center rounded-lg border border-dashed border-black px-2 py-2 transition-all duration-300 select-none group cursor-pointer active:scale-95 md:h-auto md:w-auto md:gap-3 md:rounded-xl md:px-5 md:py-3 md:hover:scale-110";
+
+  const motionProps = {
+    className: triggerClassName,
+    transition: { duration: 0.2 },
+    initial: { opacity: 0, y: 10 },
+    whileInView: { opacity: 1, y: 0 },
+  };
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onMouseMove={handleMouseMove}
+    >
+      {isResume ? (
+        <motion.button
+          type="button"
+          aria-label="Open resume"
+          onClick={onResumeOpen}
+          {...motionProps}
+        >
+          <link.Icon size={ICON_SIZE} />
+        </motion.button>
+      ) : (
+        <motion.a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          {...motionProps}
+        >
+          <link.Icon size={ICON_SIZE} />
+        </motion.a>
+      )}
+
+      <div className="hidden md:block">
+        <SocialPreview
+          type={link.type}
+          x={x}
+          y={y}
+          visible={hovered}
+          anchor={link.previewAnchor}
+          offset={link.previewOffset}
+        />
       </div>
-      
-      {/* Message Column - Reduced text size and width */}
-      <div className="flex justify-start md:justify-center tracking-tight text-2xl md:text-6xl flex-col items-start md:items-end gap-4 md:gap-8 font-light w-full pt-12 md:pt-0">
-        <motion.p
-          initial={{scale:1.5,opacity:0}}
-          whileInView={{scale:1, opacity:1}}
-          transition={{duration:1, ease:"easeInOut"}}
-        >
-          Got a project in mind?
-        </motion.p>
-        <motion.p  
-          initial={{scale:1.5,opacity:0}}
-          whileInView={{scale:1, opacity:1}}
-          transition={{duration:1, ease:"easeInOut"}}
-        >
-          Want to talk tech stack?
-        </motion.p>
-        <motion.p
-          initial={{scale:1.5,opacity:0}}
-          whileInView={{scale:1, opacity:1}}
-          transition={{duration:1, ease:"easeInOut"}}
-        >
-          My inbox is always open.
-        </motion.p>
-        <motion.p
-          initial={{scale:1.5,opacity:0}}
-          whileInView={{scale:1, opacity:1}}
-          transition={{duration:1, ease:"easeInOut"}}
-          className="w-full md:w-[40rem] text-start md:text-end"
-        >
-          Find me across the web, or drop me a direct line.
-        </motion.p>
+      <div className="absolute -bottom-6 w-full text-center">
+        <p className="text-sm text-neutral-500 text-center">
+          {link.label}
+        </p>
       </div>
-      
+    </div>
+  );
+}
+
+export default function ContactMe() {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
+  return (
+    <section
+      id="contact"
+      className="flex w-full flex-col justify-center gap-6 border-x border-dashed border-neutral-400/80 bg-white px-4 py-8 font-sans text-black md:gap-10 md:px-10 md:py-10 rounded-b-3xl"
+    >
+      <div className="grid w-full grid-cols-5 gap-2 sm:max-w-lg sm:mx-auto md:max-w-none md:flex md:justify-around md:gap-3">
+        {socialLinks.map((link) => (
+          <SocialItem
+            key={link.id}
+            link={link}
+            onResumeOpen={() => setResumeOpen(true)}
+          />
+        ))}
+      </div>
+
+      <ResumeFullscreenDialog
+        open={resumeOpen}
+        onOpenChange={setResumeOpen}
+      />
     </section>
   );
-};
+}
